@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entreculture</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-logo">
+      <a href="#">Entreculture</a>
+    </div>
+    <!-- Navbar links container (hidden on small screens) -->
+    <div class="navbar-links" id="navbarLinks">
+      <input type="text" placeholder="Search" class="navbar-search">
+      <div class="navbar-icons">
+        <a href="/pages/html/login.html" title="Locations"><img src="assets/png/location.png" alt="Location Icon"></a>
+        <a href="#" title="Cart"><img src="assets/png/card.png" alt="Cart Icon"></a>
+        <a href="#" title="Favorites"><img src="assets/png/favorite.png" alt="Favorites Icon"></a>
+        <a href="/pages/html/login.html" title="Login"><img src="assets/png/user.png" alt="Login Icon"></a>
+      </div>
+    </div>
+
+    <!-- Hamburger icon for mobile view -->
+    <div class="navbar-hamburger" id="hamburgerMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+
+  <!-- Header Section -->
+  <div class="header">
+    <h1>Fresh from the farm, Delivered to your door</h1>
+    <div class="search-bar">
+      <input type="text" placeholder="Search for products, brand and more">
+      <button>Search</button>
+    </div>
+  </div>
+
+  <!-- Category Section -->
+  <div class="category-section">
+    <h2>Shop by category</h2>
+    <div class="categories" id="categories">
+      <!-- Categories will be injected here by JavaScript -->
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entreculture - Create an Account</title>
+    <link rel="stylesheet" href="../css/signup.css">
+    
+    <script type="module" src="../javaScript/signup.js" defer></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="../../assets/logo/logo.png" alt="Entreculture Logo">
+            <h1>Entreculture</h1>
+        </div>
+        <h2>Create an account</h2>
+        <form>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Username">
+                <span class="error-message" id="usernameError"></span>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Email Address">
+                <span class="error-message" id="emailError"></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Password">
+                <span class="error-message" id="passwordError"></span>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password">
+                <span class="error-message" id="confirmPasswordError"></span>
+            </div>
+            <div class="form-group checkbox">
+                <input type="checkbox" id="terms">
+                <label for="terms">I agree to the Terms of Use and Privacy Policy</label>
+            </div>
+            <button type="submit">Sign in</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Log in</a></p>
+    </div>
+</body>
+
+</html>
