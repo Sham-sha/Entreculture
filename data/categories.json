@@ -1,0 +1,9 @@
+
+
+[
+    { "name": "Fruits", "image": "/assets/images/category/fruits .png", "description": "Fresh and organic fruits" },
+    { "name": "Vegetables", "image": "/assets/images/category/veg.png", "description": "Healthy and farm-fresh" },
+    { "name": "Grains", "image": "/assets/images/category/grains.png", "description": "Nutritious grains for your diet" },
+    { "name": "Flours", "image": "/assets/images/category/flour.png", "description": "High-quality flours for baking" },
+    { "name": "Flowers", "image": "/assets/images/category/flowers.png", "description": "Beautiful blooms for every occasion" }
+]

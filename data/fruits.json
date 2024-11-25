@@ -1,0 +1,10 @@
+[
+    { "name": "Apple", "weight": "1kg", "price": 120, "image": "apple.jpg" },
+    { "name": "Banana", "weight": "1kg", "price": 70, "image": "banana.jpg" },
+    { "name": "Orange", "weight": "1kg", "price": 110, "image": "orange.jpg" },
+    { "name": "Strawberry", "weight": "1kg", "price": 200, "image": "strawberry.jpg" },
+    { "name": "Watermelon", "weight": "1kg", "price": 50, "image": "watermelon.jpg" },
+    { "name": "Blueberry", "weight": "1kg", "price": 250, "image": "blueberry.jpg" },
+    { "name": "Grapes", "weight": "1kg", "price": 150, "image": "grapes.jpg" },
+    { "name": "Papaya", "weight": "1kg", "price": 80, "image": "papaya.jpg" }
+]
