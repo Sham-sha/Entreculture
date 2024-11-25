@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entreculture - Login</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <script defer type="module" src="../javaScript/login.js"></script>
+</head>
+
+<body>
+
+    <div class="login-container">
+        <div class="logo">
+            <img src="../../assets/logo/logo.png" alt="Entreculture Logo" >
+            <h1>Entreculture</h1>
+        </div>
+
+        <form class="login-form">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Email" >
+            <span class="error-message" id="emailError"></span>
+        
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Password" >
+            <span class="error-message" id="passwordError"></span>
+        
+            <button type="submit" class="login-btn">Log in</button>
+            <span class="error-message" id="generalError"></span> <!-- General error message -->
+        </form>
+        
+        <div class="signup-link">
+            <p>New to Entreculture? <a href="signup.html">Create an account</a></p>
+        </div>
+    </div>
+    <img src="../../index.html" alt="">
+</body>
+
+</html>

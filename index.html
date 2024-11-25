@@ -1,54 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Entreculture</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entreculture</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+
 </head>
 <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="/assets/logo/logo.png"></a>
+            <div class="logo">Entreculture</div>
+        </div>
+        <div class="navbar-center">
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
+        
+        <div class="navbar-right">
+            <a href="#location" class="icon" title="Location">
+                <i class="fas fa-map-marker-alt"></i>
+            </a>
+            <a href="#cart" class="icon" title="Shopping Cart">
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+            <a href="#wishlist" class="icon" title="Wishlist">
+                <i class="fa fa-heart" aria-hidden="true"></i>
+            </a>
+            <a href="/pages/login.html" class="icon" title="User Profile">
+                <i class="fas fa-user"></i>
+            </a>
+        </div>
+        
+    </nav>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="navbar-logo">
-      <a href="#">Entreculture</a>
-    </div>
-    <!-- Navbar links container (hidden on small screens) -->
-    <div class="navbar-links" id="navbarLinks">
-      <input type="text" placeholder="Search" class="navbar-search">
-      <div class="navbar-icons">
-        <a href="/pages/html/login.html" title="Locations"><img src="assets/png/location.png" alt="Location Icon"></a>
-        <a href="#" title="Cart"><img src="assets/png/card.png" alt="Cart Icon"></a>
-        <a href="#" title="Favorites"><img src="assets/png/favorite.png" alt="Favorites Icon"></a>
-        <a href="/pages/html/login.html" title="Login"><img src="assets/png/user.png" alt="Login Icon"></a>
-      </div>
-    </div>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Fresh from the farm,<br> Delivered to your door</h1>
+        </div>
+    </header>
 
-    <!-- Hamburger icon for mobile view -->
-    <div class="navbar-hamburger" id="hamburgerMenu">
-      <span></span>
-      <span></span>
-      <span></span>
+<section class="categories" id="categories">
+    <h2>Shop by Category</h2>
+    <div class="category-container" id="category-container">
+        <!-- Category Cards will be inserted dynamically via JavaScript -->
     </div>
-  </nav>
+</section>
 
-  <!-- Header Section -->
-  <div class="header">
-    <h1>Fresh from the farm, Delivered to your door</h1>
-    <div class="search-bar">
-      <input type="text" placeholder="Search for products, brand and more">
-      <button>Search</button>
-    </div>
-  </div>
 
-  <!-- Category Section -->
-  <div class="category-section">
-    <h2>Shop by category</h2>
-    <div class="categories" id="categories">
-      <!-- Categories will be injected here by JavaScript -->
-    </div>
-  </div>
-
-  <script src="index.js"></script>
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 FreshLand</p>
+        <div class="social-links">
+            <a href="#">Twitter</a>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Pinterest</a>
+        </div>
+    </footer>
+    <script src="/javaScript/index.js"></script>
 </body>
 </html>
