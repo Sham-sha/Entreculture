@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entreculture</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/fruits.css">
     <link rel="shortcut icon" href="https://res.cloudinary.com/dmff4imdi/image/upload/v1733246969/logo/xaccpbca6fozqqcpdvnx.png" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
-
 </head>
 <body>
     <!-- Navbar -->
@@ -16,7 +14,7 @@
         <!-- Left: Logo and Paragraph -->
         <div class="logo-container">
           <a href="#" class="logo">
-            <img src="assets/logo/logo.png" alt="Logo">
+            <img src="https://res.cloudinary.com/dmff4imdi/image/upload/v1733246970/logo/ws9pgydwqsafkfjnuxvs.png" alt="Logo">
           </a>
           <p>Entreculture</p>
         </div>
@@ -41,29 +39,14 @@
         </div>
       </nav>
 
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="hero-content">
-            <h1>Fresh from the farm,<br> Delivered to your door</h1>
+    <main>
+        <!-- Breadcrumb Navigation -->
+        <div class="breadcrumb">
+            <h2><a href="/index.html">Home</a> / <span>vegetables</span></h2>
         </div>
-    </header>
-
-<section class="categories" id="categories">
-    <h2>Shop by Category</h2>
-    <div class="category-container" id="category-container">
-        <!-- Category Cards will be inserted dynamically via JavaScript -->
-    </div>
-</section>
-    <!-- Footer -->
-    <footer>
-        <p>© 2024 FreshLand</p>
-        <div class="social-links">
-            <a href="#">Twitter</a>
-            <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
-            <a href="#">Pinterest</a>
-        </div>
-    </footer>
-    <script src="/javaScript/index.js"></script>
+        <div id="product-list" class="grid-container"></div>
+    </main>
+    <script src="/javaScript/vegetables.js"></script>
+    
 </body>
 </html>

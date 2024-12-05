@@ -1,6 +1,6 @@
 // Fetch JSON data and render products when DOM content is loaded
 document.addEventListener("DOMContentLoaded", () => {
-    fetch("/data/fruits.json")
+    fetch("/data/flowers.json")
         .then(response => {
             if (!response.ok) {
                 throw new Error("Failed to fetch fruits data");

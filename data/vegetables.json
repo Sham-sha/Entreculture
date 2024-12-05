@@ -1,0 +1,10 @@
+[
+      
+    { "name": "Tomato", "weight": "1kg", "price": 35, "image": "/assets/images/lists/vegetables/tomato.jpg" },
+    { "name": "Potato", "weight": "1kg", "price": 30, "image": "/assets/images/lists/vegetables/potato.jpg" },
+    { "name": "Broccoli", "weight": "1kg", "price": 150, "image": "/assets/images/lists/vegetables/broccoli.jpg" },
+    { "name": "Carrot", "weight": "1kg", "price": 40, "image": "/assets/images/lists/vegetables/carrot.jpg" },
+    { "name": "Cabbage", "weight": "1kg", "price": 25, "image": "/assets/images/lists/vegetables/cabbage.jpg" },
+    { "name": "Cauliflower", "weight": "1kg", "price": 50, "image": "/assets/images/lists/vegetables/cauliflower.jpg" },
+    { "name": "Capsicum", "weight": "1kg", "price": 80, "image": "/assets/images/lists/vegetables/capsicum.jpg" }
+]

@@ -1,0 +1,10 @@
+[
+    { "name": "Rice", "weight": "1kg", "price": 60, "image": "/assets/images/lists/grains/rice.jpg" },
+    { "name": "Wheat", "weight": "1kg", "price": 45, "image": "/assets/images/lists/grains/wheat.jpg" },
+    { "name": "Oats", "weight": "1kg", "price": 120, "image": "/assets/images/lists/grains/oats.jpg" },
+    { "name": "Barley", "weight": "1kg", "price": 80, "image": "/assets/images/lists/grains/barley.jpg" },
+    { "name": "Quinoa", "weight": "1kg", "price": 300, "image": "/assets/images/lists/grains/quinoa.jpg" },
+    { "name": "Millet", "weight": "1kg", "price": 100, "image": "/assets/images/lists/grains/millet.jpg" },
+    { "name": "Corn", "weight": "1kg", "price": 70, "image": "/assets/images/lists/grains/corn.jpg" },
+    { "name": "Sorghum", "weight": "1kg", "price": 90, "image": "/assets/images/lists/grains/sorghum.jpg" }
+]

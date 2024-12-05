@@ -1,0 +1,10 @@
+[
+    { "name": "Wheat Flour", "weight": "1kg", "price": 50, "image": "/assets/images/lists/flours/wheat_flour.jpg" },
+    { "name": "Rice Flour", "weight": "1kg", "price": 60, "image": "/assets/images/lists/flours/rice_flour.jpg" },
+    { "name": "Corn Flour", "weight": "1kg", "price": 70, "image": "/assets/images/lists/flours/corn_flour.jpg" },
+    { "name": "Gram Flour", "weight": "1kg", "price": 80, "image": "/assets/images/lists/flours/gram_flour.jpg" },
+    { "name": "Maida", "weight": "1kg", "price": 45, "image": "/assets/images/lists/flours/maida.jpg" },
+    { "name": "Sorghum Flour", "weight": "1kg", "price": 90, "image": "/assets/images/lists/flours/sorghum_flour.jpg" },
+    { "name": "Almond Flour", "weight": "1kg", "price": 500, "image": "/assets/images/lists/flours/almond_flour.jpg" },
+    { "name": "Coconut Flour", "weight": "1kg", "price": 350, "image": "/assets/images/lists/flours/coconut_flour.jpg" }
+]

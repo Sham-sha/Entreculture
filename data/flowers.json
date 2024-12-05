@@ -1,0 +1,10 @@
+[
+    { "name": "Rose", "weight": "1 bunch", "price": 100, "image": "/assets/images/lists/flowers/rose.jpg" },
+    { "name": "Tulip", "weight": "1 bunch", "price": 150, "image": "/assets/images/lists/flowers/tulip.jpg" },
+    { "name": "Lily", "weight": "1 bunch", "price": 200, "image": "/assets/images/lists/flowers/lily.jpg" },
+    { "name": "Sunflower", "weight": "1 bunch", "price": 120, "image": "/assets/images/lists/flowers/sunflower.jpg" },
+    { "name": "Orchid", "weight": "1 stem", "price": 250, "image": "/assets/images/lists/flowers/orchid.jpg" },
+    { "name": "Daisy", "weight": "1 bunch", "price": 80, "image": "/assets/images/lists/flowers/daisy.jpg" },
+    { "name": "Chrysanthemum", "weight": "1 bunch", "price": 180, "image": "/assets/images/lists/flowers/chrysanthemum.jpg" },
+    { "name": "Jasmine", "weight": "1 bunch", "price": 90, "image": "/assets/images/lists/flowers/jasmine.jpg" }
+]

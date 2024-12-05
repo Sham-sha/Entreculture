@@ -1,227 +1,244 @@
 /* Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* General Body */
-  body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-  }
-  
-  /* Navbar */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f4f4f4;
-    padding: 10px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .navbar-left .logo {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .navbar-center .search-bar {
-    padding: 8px;
-    width: 400px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  
-  /* Search Container */
-  .search-container {
-    position: relative;
-    width: 400px;
-  }
-  
-  .search-bar {
-    width: 100%;
-    padding: 10px 40px 10px 15px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.3s ease;
-  }
-  
-  .search-bar:focus {
-    border-color: #649265;
-  }
-  
-  .search-icon {
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-50%);
-    color: #888;
-    font-size: 16px;
-    pointer-events: none;
-    color: #649265;
-  }
-  
-  .navbar-right{
-    display: flex;
-  
-  }
-  
-  .navbar-right a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: #333;
-    font-size: 25px;
-    display: flex;
-    align-items: center;
-    transition: color 0.3s ease;
-    color: #649265;
-  }
-  
-  .navbar-right a:hover {
-    color: #4d7250; 
-    transform: scale(1.2); 
-  } 
-  .navbar-right .icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  main {
-    padding: 20px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-h2 {
-    color: #333;
+/* General Body */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
 }
+
+/* Navbar */
+    /* Navbar Styling */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .navbar .logo img {
+      width: 50px; /* Adjust logo width */
+      height: auto;
+    }
+
+    .navbar .logo p {
+      font-size: 1rem;
+      color: #333;
+      margin: 0;
+    }
+
+    .navbar .menu {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      margin-right: 20px; /* Right margin for the icons */
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1rem;
+      color: #333;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+
+    .menu-item i {
+      font-size: 1.2rem;
+    }
+
+    /* Hover Effects */
+    .menu-item:hover {
+      color: #649265;
+    }
+
+    .menu-item i:hover {
+      color: #649265;
+    }
+
+    /* Responsive Styling */
+    @media screen and (max-width: 768px) {
+      .menu {
+        gap: 20px;
+      }
+
+      .menu-item {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .menu {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 15px;
+      }
+
+      .menu-item {
+        font-size: 0.8rem;
+        gap: 6px;
+      }
+    }
+
 
 /* Breadcrumb Styles */
-.breadcrumb {
-    margin-bottom: 20px;
-    font-size: 0.9em;
-    color: #777;
-}
 
+.breadcrumb {
+  cursor: pointer;
+}
+.breadcrumb {
+  margin-bottom: 20px;
+  font-size: 0.9em;
+  color: #777;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 2%;
+}
+main{
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 2%;
+}
 .breadcrumb a {
-    text-decoration: none;
-    color: #4caf50;
+  text-decoration: none;
+  color: #649265;
 }
 
 .breadcrumb a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .breadcrumb span {
-    color: #333;
+  color: #333;
 }
 
 /* Grid and Product Card Styles */
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Auto-adjust grid */
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(200px, 1fr)
+  ); /* Auto-adjust grid */
+  gap: 20px;
 }
 
 .card {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .card img {
-    max-width: 100%;
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 10px;
-    margin-bottom: 10px;
+  width: 100%; /* Ensure it fits the container's width */
+  height: 200px; /* Set a fixed height for the square */
+  object-fit: cover; /* Crop the image to fit the square */
+  border-radius: 10px; /* Keeps rounded corners */
+  overflow: hidden; /* Ensures any overflow is hidden */
+  margin-bottom: 10px;
 }
 
 .card h3 {
-    margin: 10px 0 5px;
-    font-size: 1.2em;
-    color: #333;
+  margin: 10px 0 5px;
+  font-size: 1.2em;
+  color: #333;
 }
 
 .card p {
-    color: #777;
-    margin: 5px 0;
+  color: #777;
+  margin: 5px 0;
 }
 
 .card button {
-    padding: 10px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 10px;
+  background-color: #649265;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .card button:hover {
-    background-color: #45a049;
+  background-color: #4b6d4b;
 }
 
 /* Responsive Styles */
 
 /* For tablets (768px and smaller) */
 @media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(150px, 1fr)
+    ); /* Smaller card sizes */
+  }
 
-    .grid-container {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Smaller card sizes */
-    }
+  .card h3 {
+    font-size: 1em; /* Reduce heading size */
+  }
 
-    .card h3 {
-        font-size: 1em; /* Reduce heading size */
-    }
+  .card img {
+    height: 150px; /* Adjust for smaller screens */
+  }
+
+  .navbar {
+    flex-wrap: wrap; /* Allow items to stack */
+  }
+  .search-container {
+    width: 100%; /* Search bar takes full width */
+    margin: 10px 0; /* Add spacing */
+  }
+  .navbar-right a {
+    font-size: 20px; /* Reduce icon size */
+  }
 }
 
+/* Media Queries for Responsiveness */
 
-  /* Media Queries for Responsiveness */
-
-/* For small devices (max-width: 768px) */
-@media (max-width: 768px) {
-    .navbar {
-      flex-wrap: wrap; /* Allow items to stack */
-    }
-    .search-container {
-      width: 100%; /* Search bar takes full width */
-      margin: 10px 0; /* Add spacing */
-    }
-    .navbar-right a {
-      font-size: 20px; /* Reduce icon size */
-    }
+/* For extra-small devices (max-width: 480px) */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px;
   }
-  
-  /* For extra-small devices (max-width: 480px) */
-  @media (max-width: 480px) {
-    .navbar {
-      padding: 10px;
-    }
-    .logo {
-      font-size: 18px; /* Smaller logo text */
-    }
-    .grid-container {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Adjust grid to smaller screens */
-    }
+  .logo {
+    font-size: 18px; /* Smaller logo text */
+  }
+  .grid-container {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(120px, 1fr)
+    ); /* Adjust grid to smaller screens */
+  }
 
-    .card {
-        padding: 10px; /* Reduce padding for cards */
-    }
+  .card {
+    padding: 10px; /* Reduce padding for cards */
+  }
 
-    .card h3 {
-        font-size: 0.9em; /* Smaller product name */
-    }
+  .card h3 {
+    font-size: 0.9em; /* Smaller product name */
+  }
 
-    .card button {
-        font-size: 0.8em; /* Smaller button text */
-        padding: 8px;
-    }
+  .card button {
+    font-size: 0.8em; /* Smaller button text */
+    padding: 8px;
+  }
 }

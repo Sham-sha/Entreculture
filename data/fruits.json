@@ -1,10 +1,10 @@
 [
-    { "name": "Apple", "weight": "1kg", "price": 120, "image": "apple.jpg" },
-    { "name": "Banana", "weight": "1kg", "price": 70, "image": "banana.jpg" },
-    { "name": "Orange", "weight": "1kg", "price": 110, "image": "orange.jpg" },
-    { "name": "Strawberry", "weight": "1kg", "price": 200, "image": "strawberry.jpg" },
-    { "name": "Watermelon", "weight": "1kg", "price": 50, "image": "watermelon.jpg" },
-    { "name": "Blueberry", "weight": "1kg", "price": 250, "image": "blueberry.jpg" },
-    { "name": "Grapes", "weight": "1kg", "price": 150, "image": "grapes.jpg" },
-    { "name": "Papaya", "weight": "1kg", "price": 80, "image": "papaya.jpg" }
+    { "name": "Apple", "weight": "1kg", "price": 120, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733247167/list/fruits/jiaz3erryxgu2lmllbo2.jpg" },
+    { "name": "Banana", "weight": "1kg", "price": 70, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733247167/list/fruits/rekyyd3zj0nrsotiqnvf.jpg" },
+    { "name": "Orange", "weight": "1kg", "price": 110, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733247167/list/fruits/iacwtvba6grivtzcxf4g.jpg" },
+    { "name": "Strawberry", "weight": "1kg", "price": 200, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733247169/list/fruits/vig7z3dcoj39icqqc1sd.jpg" },
+    { "name": "Watermelon", "weight": "1kg", "price": 50, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733247170/list/fruits/b0ygsfxl6gimzodyihoo.jpg" },
+    { "name": "Blueberry", "weight": "1kg", "price": 250, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733247167/list/fruits/gph0hzqxwa3g03fuwkke.jpg" },
+    { "name": "Grapes", "weight": "1kg", "price": 150, "image": "/assets/images/lists/fruits/grapes.jpg" },
+    { "name": "Papaya", "weight": "1kg", "price": 80, "image": "/assets/images/lists/fruits/papaya.jpg" }
 ]
