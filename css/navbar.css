@@ -1,0 +1,115 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General Body */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    padding-top: 70px; /* Adjust this padding to match the height of your navbar */
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 70px; /* Adjust this height value as per your navbar */
+}
+
+/* Logo Container */
+.navbar .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar .logo img {
+    width: 50px; /* Adjust logo width */
+    height: auto;
+}
+
+.navbar .logo p {
+    font-size: 1rem;
+    color: #333;
+    margin: 0;
+}
+
+/* Menu */
+.navbar .menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-right: 20px; /* Right margin for the icons */
+    flex-wrap: nowrap; /* Ensures icons don't wrap in normal screen sizes */
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.menu-item i {
+    font-size: 1.2rem;
+}
+
+/* Hover Effects */
+.menu-item:hover {
+    color: #649265;
+}
+
+.menu-item i:hover {
+    color: #649265;
+}
+
+/* Responsive Styling */
+@media screen and (max-width: 768px) {
+    .menu {
+        gap: 20px;
+        flex-wrap: wrap; /* Allows items to wrap when necessary */
+        justify-content: center; /* Centers the items */
+    }
+
+    .menu-item {
+        font-size: 0.9rem;
+        padding: 5px; /* Padding to give some space */
+    }
+
+    .navbar {
+        height: auto; /* Allows the navbar to adjust height when wrapping */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .menu {
+        justify-content: center; /* Ensure icons are centered */
+        gap: 15px;
+    }
+
+    .menu-item {
+        font-size: 0.8rem;
+        gap: 6px;
+    }
+
+    /* Optional: Adjust icon sizes on very small screens */
+    .menu-item i {
+        font-size: 1rem;
+    }
+}

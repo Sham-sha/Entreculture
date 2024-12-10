@@ -1,10 +1,13 @@
 [
-    { "name": "Rose", "weight": "1 bunch", "price": 100, "image": "/assets/images/lists/flowers/rose.jpg" },
-    { "name": "Tulip", "weight": "1 bunch", "price": 150, "image": "/assets/images/lists/flowers/tulip.jpg" },
-    { "name": "Lily", "weight": "1 bunch", "price": 200, "image": "/assets/images/lists/flowers/lily.jpg" },
-    { "name": "Sunflower", "weight": "1 bunch", "price": 120, "image": "/assets/images/lists/flowers/sunflower.jpg" },
-    { "name": "Orchid", "weight": "1 stem", "price": 250, "image": "/assets/images/lists/flowers/orchid.jpg" },
-    { "name": "Daisy", "weight": "1 bunch", "price": 80, "image": "/assets/images/lists/flowers/daisy.jpg" },
-    { "name": "Chrysanthemum", "weight": "1 bunch", "price": 180, "image": "/assets/images/lists/flowers/chrysanthemum.jpg" },
-    { "name": "Jasmine", "weight": "1 bunch", "price": 90, "image": "/assets/images/lists/flowers/jasmine.jpg" }
+    { "name": "Rose", "weight": "1 bunch", "price": 100, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733765482/list/flowers/yjytcmuvjyvcnugsmuqd.jpg" },
+    { "name": "Marigold", "weight": "1 bunch", "price": 50, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733765481/list/flowers/mivv8ttzij8onks7j5xb.jpg" },
+    { "name": "Tulip", "weight": "1 bunch", "price": 150, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733765481/list/flowers/tn0b27skyvwhbrzduhpk.jpg" },
+    { "name": "Lily", "weight": "1 bunch", "price": 200, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733765482/list/flowers/zbilfuupor1ryyjl1zzu.jpg" },
+    { "name": "Sunflower", "weight": "1 bunch", "price": 120, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733765481/list/flowers/pghiyxw3qlppiqyolwfi.jpg" },
+    { "name": "Jasmine", "weight": "1 bunch", "price": 90, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733765480/list/flowers/aypujf3zykykg6akytlj.jpg" },
+    { "name": "Orchid", "weight": "1 stem", "price": 250, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733765480/list/flowers/enzxpidfdsxgizhb4uct.jpg" },
+    { "name": "Chrysanthemum", "weight": "1 bunch", "price": 180, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733765480/list/flowers/azw9ijbydcw1zpzhzsgo.jpg" },
+    { "name": "Lotus", "weight": "1 bunch", "price": 120, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733765480/list/flowers/ihiuusm3vr0htmbcmewg.jpg" },
+    { "name": "Bougainvillea", "weight": "1 bunch", "price": 70, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733765483/list/flowers/s53secnkw3pkjjk6wuuq.jpg" }
 ]
+

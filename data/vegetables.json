@@ -1,10 +1,12 @@
 [
-      
-    { "name": "Tomato", "weight": "1kg", "price": 35, "image": "/assets/images/lists/vegetables/tomato.jpg" },
-    { "name": "Potato", "weight": "1kg", "price": 30, "image": "/assets/images/lists/vegetables/potato.jpg" },
-    { "name": "Broccoli", "weight": "1kg", "price": 150, "image": "/assets/images/lists/vegetables/broccoli.jpg" },
-    { "name": "Carrot", "weight": "1kg", "price": 40, "image": "/assets/images/lists/vegetables/carrot.jpg" },
-    { "name": "Cabbage", "weight": "1kg", "price": 25, "image": "/assets/images/lists/vegetables/cabbage.jpg" },
-    { "name": "Cauliflower", "weight": "1kg", "price": 50, "image": "/assets/images/lists/vegetables/cauliflower.jpg" },
-    { "name": "Capsicum", "weight": "1kg", "price": 80, "image": "/assets/images/lists/vegetables/capsicum.jpg" }
+    { "name": "Tomato", "weight": "1kg", "price": 40, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733763524/list/veg/icppbov98glb5rgmiz92.jpg" },
+    { "name": "Potato", "weight": "1kg", "price": 30, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733763523/list/veg/dnvfo3mdgqxoh8bufusl.jpg" },
+    { "name": "Onion", "weight": "1kg", "price": 35, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733763523/list/veg/mqqxmiaycgvvbj00dmkd.jpg" },
+    { "name": "Carrot", "weight": "1kg", "price": 50, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733763523/list/veg/qucfy8zghmiryhzdigo9.jpg" },
+    { "name": "Bottle Gourd", "weight": "1kg", "price": 30, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733763522/list/veg/yiu0ddytokdxmb8eu8fi.jpg" },
+    { "name": "Drumstick", "weight": "1kg", "price": 80, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733763521/list/veg/xkbeh6fy8ybqocbuydqm.jpg" },
+    { "name": "Brinjal", "weight": "1kg", "price": 45, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733763523/list/veg/zxmjeinazokaotele97z.jpg" },
+    { "name": "Cauliflower", "weight": "1kg", "price": 50, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733763522/list/veg/xkel4fopacgb7zsg2irv.jpg" },
+    { "name": "Cabbage", "weight": "1kg", "price": 25, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733763522/list/veg/q4oxjhed57aybywhrsk2.jpg" },
+    { "name": "Okra (Lady Finger)", "weight": "1kg", "price": 60, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733763522/list/veg/fqgawlberenprmxeouna.jpg" }
 ]

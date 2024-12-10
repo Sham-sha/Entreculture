@@ -1,9 +1,9 @@
 
 
 [
-    { "name": "Fruits", "image": "/assets/images/category/fruits .png", "description": "Fresh and organic fruits" },
-    { "name": "Vegetables", "image": "/assets/images/category/veg.png", "description": "Healthy and farm-fresh" },
-    { "name": "Grains", "image": "/assets/images/category/grains.png", "description": "Nutritious grains for your diet" },
-    { "name": "Flours", "image": "/assets/images/category/flour.png", "description": "High-quality flours for baking" },
-    { "name": "Flowers", "image": "/assets/images/category/flowers.png", "description": "Beautiful blooms for every occasion" }
+    { "name": "Fruits", "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733247047/category/faxar1hkvojs2uxjbvqr.png", "description": "Fresh and organic fruits" },
+    { "name": "Vegetables", "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733247046/category/mhu0wae602sfdh9gmtwz.png", "description": "Healthy and farm-fresh" },
+    { "name": "Grains", "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733247046/category/l4agu24fklvcx4yiywin.png", "description": "Nutritious grains for your diet" },
+    { "name": "Flours", "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733247046/category/yw20kasmru1eltjak7vs.png", "description": "High-quality flours for baking" },
+    { "name": "Flowers", "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733247046/category/qi9j25fyq3dcyuc2nqa2.png", "description": "Beautiful blooms for every occasion" }
 ]
