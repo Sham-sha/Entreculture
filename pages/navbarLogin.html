@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar</title>
-    <link rel="stylesheet" href="../css/navbar.css">
+    <title>Navbar-Account</title>
+    <link rel="stylesheet" href="../css/navbarLogin.css">
     <link rel="shortcut icon" href="https://res.cloudinary.com/dmff4imdi/image/upload/v1733246969/logo/xaccpbca6fozqqcpdvnx.png" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
 </head>
 <body>
     <nav class="navbar">
@@ -18,6 +17,7 @@
           </a>
           <p>Entreculture</p>
         </div>
+    
         <!-- Right: Menu Items -->
         <div class="menu">
           <!-- Search -->
@@ -25,10 +25,14 @@
             <i class="fas fa-search"></i>
             <span>Search</span>
           </div>
-          <!-- Log In -->
-          <div class="menu-item" id="login">
+          <!-- Account Dropdown -->
+          <div class="menu-item dropdown" id="account">
             <i class="fas fa-user"></i>
-            <span>Sign In</span>
+            <span>Account</span>
+            <div class="dropdown-menu">
+              <a href="/profile.html" class="dropdown-item">Profile</a>
+              <a href="../index.html" class="dropdown-item" id="logout">Log Out</a>
+            </div>
           </div>
           <!-- Cart -->
           <div class="menu-item" id="cart">
@@ -37,6 +41,6 @@
           </div>
         </div>
       </nav>
-<script src="/javaScript/navbar.js"></script>
+      <script src="/javaScript/navbar.js"></script>
 </body>
 </html>

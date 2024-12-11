@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const passwordError = document.getElementById("passwordError");
     const generalError = document.getElementById("generalError");
 
-    // Prevent form submission and handle it with JavaScript
     form.addEventListener("submit", async (e) => {
         e.preventDefault(); // Prevent form submission to avoid page reload
 
@@ -39,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let isValid = true;
 
-        // Email field validation
+        // Validate email and password fields
         if (!email) {
             emailError.textContent = "Email is required.";
             isValid = false;
@@ -48,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
             isValid = false;
         }
 
-        // Password field validation
         if (!password) {
             passwordError.textContent = "Password is required.";
             isValid = false;
@@ -56,15 +54,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (isValid) {
             try {
-                // Attempt to log in with Firebase
-                await signInWithEmailAndPassword(auth, email, password);
+                // Log in using Firebase
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
 
-                // Redirect to home page upon successful login
+                // Save login info securely in sessionStorage
+                const idToken = await user.getIdToken();
+                sessionStorage.setItem("userToken", idToken);
+                sessionStorage.setItem("userEmail", user.email);
+
+                // Redirect to home page
                 window.location.href = "../../index.html";
             } catch (error) {
                 console.error("Error logging in:", error);
 
-                // Handle Firebase authentication errors and display specific messages
+                // Handle Firebase errors
                 if (error.code === "auth/user-not-found") {
                     emailError.textContent = "No user found with this email address.";
                 } else if (error.code === "auth/wrong-password") {
@@ -80,3 +84,4 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
