@@ -1,13 +1,12 @@
 [
-    { "name": "Mango", "weight": "1kg", "price": 150, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733761794/list/fruits/iowrdlixkp3fjbldokqp.jpg" },
-    { "name": "Banana", "weight": "1kg", "price": 60, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733761794/list/fruits/nhu0gk4qptifyb2pn32m.jpg" },
-    { "name": "Guava", "weight": "1kg", "price": 80, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733761794/list/fruits/kgx4mehrbkhs5mqdvx41.jpg" },
-    { "name": "Pineapple", "weight": "1kg", "price": 100, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733761793/list/fruits/afmugjgdnzfa74ynkquy.jpg" },
-    { "name": "Papaya", "weight": "1kg", "price": 70, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733761793/list/fruits/eztwfpynkgvnf4xwivym.jpg" },
-    { "name": "Litchi", "weight": "1kg", "price": 250, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733761793/list/fruits/kj4csmse4vzcurijvxup.jpg" },
-    { "name": "Apple", "weight": "1kg", "price": 200, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733761794/list/fruits/jdgcgav6a2tqvckjyeug.jpg" },
-    { "name": "Watermelon", "weight": "1kg", "price": 40, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733761793/list/fruits/fitzxo4k35z2tdhmk2ig.jpg" },
-    { "name": "Jackfruit", "weight": "1kg", "price": 120, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733761793/list/fruits/npqlxdouxdu3xjpomy2e.jpg" },
-    { "name": "Custard Apple", "weight": "1kg", "price": 150, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733761793/list/fruits/jlcmevhnn8ymsa4xayll.jpg" }
+    { "name": "Mango", "weight": "1kg", "price": 150, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/q_auto/v1733761794/list/fruits/iowrdlixkp3fjbldokqp.jpg" },
+    { "name": "Banana", "weight": "1kg", "price": 60, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/q_auto/v1733761794/list/fruits/nhu0gk4qptifyb2pn32m.jpg" },
+    { "name": "Guava", "weight": "1kg", "price": 80, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/q_auto/v1733761794/list/fruits/kgx4mehrbkhs5mqdvx41.jpg" },
+    { "name": "Pineapple", "weight": "1kg", "price": 100, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/q_auto/v1733761793/list/fruits/afmugjgdnzfa74ynkquy.jpg" },
+    { "name": "Papaya", "weight": "1kg", "price": 70, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/q_auto/v1733761793/list/fruits/eztwfpynkgvnf4xwivym.jpg" },
+    { "name": "Litchi", "weight": "1kg", "price": 250, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/q_auto/v1733761793/list/fruits/kj4csmse4vzcurijvxup.jpg" },
+    { "name": "Apple", "weight": "1kg", "price": 200, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/q_auto/v1733761794/list/fruits/jdgcgav6a2tqvckjyeug.jpg" },
+    { "name": "Watermelon", "weight": "1kg", "price": 40, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/q_auto/v1733761793/list/fruits/fitzxo4k35z2tdhmk2ig.jpg" },
+    { "name": "Jackfruit", "weight": "1kg", "price": 120, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/q_auto/v1733761793/list/fruits/npqlxdouxdu3xjpomy2e.jpg" },
+    { "name": "Custard Apple", "weight": "1kg", "price": 150, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/q_auto/v1733761793/list/fruits/jlcmevhnn8ymsa4xayll.jpg" }
 ]
-
