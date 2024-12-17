@@ -1,12 +1,12 @@
 [
-    { "name": "Wheat Flour", "weight": "1kg", "price": 50, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" },
-    { "name": "Rice Flour", "weight": "1kg", "price": 60, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" },
-    { "name": "Corn Flour", "weight": "1kg", "price": 70, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" },
-    { "name": "Gram Flour", "weight": "1kg", "price": 80, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" },
-    { "name": "Maida", "weight": "1kg", "price": 45, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" },
-    { "name": "Sorghum Flour", "weight": "1kg", "price": 90, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" },
-    { "name": "Almond Flour", "weight": "1kg", "price": 500, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" },
-    { "name": "Coconut Flour", "weight": "1kg", "price": 350, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" },
-    { "name": "Barley Flour", "weight": "1kg", "price": 80, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" },
-    { "name": "Ragi Flour ", "weight": "1kg", "price": 60, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" }
+    { "id": "flour-001", "name": "Wheat Flour", "weight": "1kg", "price": 50, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" },
+    { "id": "flour-002", "name": "Rice Flour", "weight": "1kg", "price": 60, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" },
+    { "id": "flour-003", "name": "Corn Flour", "weight": "1kg", "price": 70, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" },
+    { "id": "flour-004", "name": "Gram Flour", "weight": "1kg", "price": 80, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" },
+    { "id": "flour-005", "name": "Maida", "weight": "1kg", "price": 45, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" },
+    { "id": "flour-006", "name": "Sorghum Flour", "weight": "1kg", "price": 90, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" },
+    { "id": "flour-007", "name": "Almond Flour", "weight": "1kg", "price": 500, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" },
+    { "id": "flour-008", "name": "Coconut Flour", "weight": "1kg", "price": 350, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" },
+    { "id": "flour-009", "name": "Barley Flour", "weight": "1kg", "price": 80, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" },
+    { "id": "flour-010", "name": "Ragi Flour", "weight": "1kg", "price": 60, "image": "https://res.cloudinary.com/dmff4imdi/image/upload/v1733764960/list/flours/ezhsz6wh87o1fg214gaj.jpg" }
 ]

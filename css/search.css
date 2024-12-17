@@ -9,21 +9,25 @@
 .container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 20px; /* Added padding for spacing */
 }
 
+/* Title Styling */
 h1 {
-margin-top: 10%;
+    margin-top: 5%;
     text-align: center;
     color: #333;
     margin-bottom: 20px;
 }
 
+/* Search container */
 .search-container {
     position: relative;
     max-width: 500px;
     margin: 0 auto 40px;
 }
 
+/* Search input box */
 #searchInput {
     width: 100%;
     padding: 12px 40px 12px 15px;
@@ -31,13 +35,15 @@ margin-top: 10%;
     border-radius: 8px;
     font-size: 16px;
     outline: none;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s ease;
 }
 
+/* Focus state for search input */
 #searchInput:focus {
     border-color: #649265;
 }
 
+/* Search icon positioning inside the search box */
 .search-icon {
     position: absolute;
     right: 12px;
@@ -50,16 +56,19 @@ margin-top: 10%;
     cursor: pointer;
 }
 
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+/* Grid container for products */
+#productGrid {
+    display: none;  /* Initially hide the grid */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Flexible grid */
     gap: 20px;
     padding: 20px 0;
     min-height: 200px;
+    transition: all 0.3s ease; /* Added transition for smooth resizing */
 }
 
+/* Styling for empty state message when no products are found */
 .empty-state {
-    grid-column: 1 / -1;
+    grid-column: 1 / -1; /* Span full width */
     text-align: center;
     padding: 40px;
     color: #666;
@@ -69,65 +78,74 @@ margin-top: 10%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Product card styling */
 .product-card {
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    transition: transform 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition for hover effect */
 }
 
 .product-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
 }
 
+/* Product image inside the card */
 .product-image {
     width: 100%;
     height: 200px;
     object-fit: cover;
 }
 
+/* Product information styling */
 .product-info {
     padding: 15px;
 }
 
+/* Product name styling */
 .product-name {
     font-size: 18px;
     color: #333;
     margin-bottom: 10px;
 }
 
+/* Product price styling */
 .product-price {
     font-size: 20px;
     font-weight: bold;
-    color: #007bff;
+    color: #649265;  /* Updated to the new color */
     margin-bottom: 15px;
 }
 
+/* Add to cart button styling */
 .add-to-cart {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #649265;  /* Updated to the new color */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
+/* Add to cart button hover effect */
 .add-to-cart:hover {
-    background-color: #0056b3;
+    background-color: #4b6d4b; /* Darker shade of the updated color */
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
     .product-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Smaller columns on tablets */
     }
 }
 
 @media (max-width: 480px) {
     .product-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Single column layout on small screens */
     }
 }

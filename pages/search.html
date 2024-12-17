@@ -3,31 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/search.css">
+    <title>Product Search</title>
+    <link rel="stylesheet" href="../css/search.css">
     <link rel="shortcut icon" href="https://res.cloudinary.com/dmff4imdi/image/upload/v1733246969/logo/xaccpbca6fozqqcpdvnx.png" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-     <!-- Placeholder for Navbar -->
- <div id="navbar-placeholder"></div>
- <div id="navbar-placeholder-afterlogin"></div>
+    <div id="navbar-placeholder"></div>
+    <div id="navbar-placeholder-afterlogin"></div>
 
- <div class="container">
-    <h1>Our Products</h1>
-    
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search products...">
-        <button class="search-icon"><i class="fas fa-search"></i></button>
+    <div class="container">
+        <h1>Our Products</h1>
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search products...">
+            <button class="search-icon">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+
+        <div id="productGrid" class="product-grid">
+            <!-- Products will be dynamically inserted here -->
+        </div>
     </div>
 
-    <div id="productGrid" class="product-grid">
-        <!-- Products will be dynamically inserted here -->
-    </div>
-</div>
-
-
-<script src="/javaScript/search.js"></script>
-<script src="/javaScript/navbar.js"></script>
+    <script src="/javaScript/search.js"></script>
+    <script src="/javaScript/navbar.js"></script>
 </body>
 </html>
