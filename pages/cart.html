@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cart</title>
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Entreculture</title>
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="shortcut icon" href="https://res.cloudinary.com/dmff4imdi/image/upload/v1733246969/logo/xaccpbca6fozqqcpdvnx.png" type="image/x-icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body>
     <!-- Placeholder for Navbar -->
     <div id="navbar-placeholder"></div>
     <div id="navbar-placeholder-afterlogin"></div>
-    <script src="/javaScript/navbar.js"></script>
-  </body>
+
+    <main>
+        <!-- Breadcrumb Navigation -->
+        <div class="breadcrumb">
+            <h2><a href="/index.html">Home</a> / <span>Cart</span></h2>
+        </div>
+
+        <div class="cart-container">
+            <div id="cart-items">
+                <!-- Cart items will be displayed here -->
+            </div>
+            <div class="cart-summary">
+                <h3>Cart Summary</h3>
+                <div class="summary-details">
+                    <p>Total Items: <span id="total-items">0</span></p>
+                    <p>Total Amount: ₹<span id="total-amount">0</span></p>
+                </div>
+                <button id="checkout-btn" class="checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="../javaScript/cart.js"></script>
+    <script src="../javaScript/navbar.js"></script>
+</body>
 </html>
