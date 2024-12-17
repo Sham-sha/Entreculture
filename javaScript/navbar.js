@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const navbarPlaceholder = document.getElementById("navbar-placeholder");
 
     // Check login status
-    const isLoggedIn = sessionStorage.getItem("userToken");
+    const isLoggedIn = localStorage.getItem("userToken");
 
     // Function to load and display the appropriate navbar
     const loadNavbar = (filePath) => {
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (logout) {
             logout.addEventListener("click", () => {
-                sessionStorage.clear();
+                localStorage.clear();
                 window.location.href = "/index.html"; // Redirect to the homepage
             });
         }

@@ -1,72 +1,86 @@
-// Fetch and render products
+
 document.addEventListener("DOMContentLoaded", () => {
-    loadProducts();
+    showLoadingAnimation(); 
+    loadProducts(); // 
 });
 
+// Function to load products from a JSON file
 async function loadProducts() {
+    
     const productList = document.getElementById("product-list");
-    
-    // Add loading state
-    showLoadingState(productList);
-    
+
     try {
+        
         const response = await fetch("/data/vegetables.json");
+
+        
         if (!response.ok) {
-            throw new Error("Failed to fetch fruits data");
+            throw new Error("Failed to load products");
         }
-        const data = await response.json();
-        renderProducts(data);
+
+        
+        const products = await response.json();
+
+        
+        displayProducts(products);
     } catch (error) {
-        console.error("Error loading fruits data:", error);
-        showErrorState(productList);
+        
+        console.error("Error:", error);
+        showError(productList);
+    } finally {
+        hideLoadingAnimation();
     }
 }
 
-function showLoadingState(container) {
-    container.innerHTML = Array(8)
-        .fill()
-        .map(() => `
-            <div class="card loading">
-                <div class="card-image-container"></div>
-                <div class="card-content">
-                    <h3>&nbsp;</h3>
-                    <p class="weight">&nbsp;</p>
-                    <p class="price">&nbsp;</p>
-                    <button disabled>Add to Cart</button>
-                </div>
-            </div>
-        `)
-        .join("");
-}
 
-function showErrorState(container) {
+function showError(container) {
     container.innerHTML = `
-        <div style="text-align: center; grid-column: 1 / -1; padding: 2rem;">
-            <p style="color: #e53e3e; font-size: 1.1rem;">
+        <div style="text-align: center; padding: 20px;">
+            <p style="color: #e74c3c; font-size: 1.1em;">
                 Sorry, we couldn't load the products. Please try again later.
             </p>
         </div>
     `;
 }
 
-function renderProducts(data) {
+
+function displayProducts(products) {
+   
     const productList = document.getElementById("product-list");
-    productList.innerHTML = data.map(item => `
-        <div class="card">
-            <div class="card-image-container">
-                <img src="${item.image}" alt="${item.name}" loading="lazy">
+
+   
+    const productCards = products.map(product => {
+        return `
+            <div class="card">
+                <!-- Product Image -->
+                <img src="${product.image}" alt="${product.name}">
+
+                <!-- Product Details -->
+                <div class="card-content">
+                    <h3>${product.name}</h3>
+                    <p>Weight: ${product.weight}</p>
+                    <p>Price: ₹${product.price}</p>
+                    <button onclick="addToCart('${product.id}')">Add to Cart</button>
+                </div>
             </div>
-            <div class="card-content">
-                <h3>${item.name}</h3>
-                <p class="weight">${item.weight}</p>
-                <p class="price">₹${item.price}</p>
-                <button onclick="addToCart('${item.id}')">Add to Cart</button>
-            </div>
-        </div>
-    `).join("");
+        `;
+    }).join(""); 
+
+ 
+    productList.innerHTML = productCards;
 }
 
+
 function addToCart(productId) {
-    // Add your cart functionality here
-    console.log(`Product ${productId} added to cart`);
+    console.log(`Added product ${productId} to cart`); 
+    alert("Product added to cart!"); 
+}
+
+
+function showLoadingAnimation() {
+    console.log("Loading..."); 
+}
+
+function hideLoadingAnimation() {
+    console.log("Loading complete."); 
 }
