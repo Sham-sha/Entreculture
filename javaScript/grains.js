@@ -1,72 +1,84 @@
-// Fetch and render products
 document.addEventListener("DOMContentLoaded", () => {
+    showLoadingAnimation();
     loadProducts();
 });
 
 async function loadProducts() {
     const productList = document.getElementById("product-list");
-    
-    // Add loading state
-    showLoadingState(productList);
-    
     try {
         const response = await fetch("/data/grains.json");
-        if (!response.ok) {
-            throw new Error("Failed to fetch fruits data");
-        }
-        const data = await response.json();
-        renderProducts(data);
+        if (!response.ok) throw new Error("Failed to load products");
+        const products = await response.json();
+        displayProducts(products);
     } catch (error) {
-        console.error("Error loading fruits data:", error);
-        showErrorState(productList);
+        console.error("Error loading products:", error);
+        showError(productList);
+    } finally {
+        hideLoadingAnimation();
     }
 }
 
-function showLoadingState(container) {
-    container.innerHTML = Array(8)
-        .fill()
-        .map(() => `
-            <div class="card loading">
-                <div class="card-image-container"></div>
-                <div class="card-content">
-                    <h3>&nbsp;</h3>
-                    <p class="weight">&nbsp;</p>
-                    <p class="price">&nbsp;</p>
-                    <button disabled>Add to Cart</button>
-                </div>
+function displayProducts(products) {
+    const productList = document.getElementById("product-list");
+    const productCards = products.map(product => `
+        <div class="card">
+            <img src="${product.image}" alt="${product.name}">
+            <div class="card-content">
+                <h3>${product.name}</h3>
+                <p>Weight: ${product.weight}</p>
+                <p>Price: ₹${product.price}</p>
+                <button onclick="addToCart('${product.id}', '${product.name}', '${product.image}', '${product.price}', '${product.weight}')">
+                    Add to Cart
+                </button>
             </div>
-        `)
-        .join("");
+        </div>
+    `).join("");
+    productList.innerHTML = productCards;
 }
 
-function showErrorState(container) {
+function addToCart(id, name, image, price, weight) {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingItem = cart.find(item => item.id === id);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ id, name, image, price: parseFloat(price), weight, quantity: 1 });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    showPopup(`${name} added to cart!`);
+}
+
+function showPopup(message) {
+    const popup = document.createElement('div');
+    popup.className = 'cart-popup';
+    popup.textContent = message;
+
+    document.body.appendChild(popup);
+
+    // Remove the popup after animation ends
+    setTimeout(() => {
+        popup.classList.add('hide');
+        popup.addEventListener('transitionend', () => popup.remove());
+    }, 2000);
+}
+
+
+function showLoadingAnimation() {
+    console.log("Loading...");
+}
+
+function hideLoadingAnimation() {
+    console.log("Loading complete.");
+}
+
+function showError(container) {
     container.innerHTML = `
-        <div style="text-align: center; grid-column: 1 / -1; padding: 2rem;">
-            <p style="color: #e53e3e; font-size: 1.1rem;">
+        <div style="text-align: center; padding: 20px;">
+            <p style="color: #e74c3c; font-size: 1.1em;">
                 Sorry, we couldn't load the products. Please try again later.
             </p>
         </div>
     `;
-}
-
-function renderProducts(data) {
-    const productList = document.getElementById("product-list");
-    productList.innerHTML = data.map(item => `
-        <div class="card">
-            <div class="card-image-container">
-                <img src="${item.image}" alt="${item.name}" loading="lazy">
-            </div>
-            <div class="card-content">
-                <h3>${item.name}</h3>
-                <p class="weight">${item.weight}</p>
-                <p class="price">₹${item.price}</p>
-                <button onclick="addToCart('${item.id}')">Add to Cart</button>
-            </div>
-        </div>
-    `).join("");
-}
-
-function addToCart(productId) {
-    // Add your cart functionality here
-    console.log(`Product ${productId} added to cart`);
 }

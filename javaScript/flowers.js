@@ -1,33 +1,78 @@
-// Wait for the page to load
 document.addEventListener("DOMContentLoaded", () => {
-    showLoadingAnimation(); // Show loading animation immediately
+    showLoadingAnimation();
     loadProducts();
 });
 
-
-
-// Load products from JSON file
 async function loadProducts() {
     const productList = document.getElementById("product-list");
-
     try {
-        // Fetch the products data
-        const response = await fetch("/data/fruits.json");
-        if (!response.ok) {
-            throw new Error("Failed to load products");
-        }
-
+        const response = await fetch("/data/flowers.json");
+        if (!response.ok) throw new Error("Failed to load products");
         const products = await response.json();
         displayProducts(products);
     } catch (error) {
-        console.error("Error:", error);
+        console.error("Error loading products:", error);
         showError(productList);
     } finally {
-        hideLoadingAnimation(); // Hide loading animation once loading is complete
+        hideLoadingAnimation();
     }
 }
 
-// Show error message
+function displayProducts(products) {
+    const productList = document.getElementById("product-list");
+    const productCards = products.map(product => `
+        <div class="card">
+            <img src="${product.image}" alt="${product.name}">
+            <div class="card-content">
+                <h3>${product.name}</h3>
+                <p>Weight: ${product.weight}</p>
+                <p>Price: ₹${product.price}</p>
+                <button onclick="addToCart('${product.id}', '${product.name}', '${product.image}', '${product.price}', '${product.weight}')">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    `).join("");
+    productList.innerHTML = productCards;
+}
+
+function addToCart(id, name, image, price, weight) {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingItem = cart.find(item => item.id === id);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ id, name, image, price: parseFloat(price), weight, quantity: 1 });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    showPopup(`${name} added to cart!`);
+}
+
+function showPopup(message) {
+    const popup = document.createElement('div');
+    popup.className = 'cart-popup';
+    popup.textContent = message;
+
+    document.body.appendChild(popup);
+
+    // Remove the popup after animation ends
+    setTimeout(() => {
+        popup.classList.add('hide');
+        popup.addEventListener('transitionend', () => popup.remove());
+    }, 2000);
+}
+
+
+function showLoadingAnimation() {
+    console.log("Loading...");
+}
+
+function hideLoadingAnimation() {
+    console.log("Loading complete.");
+}
+
 function showError(container) {
     container.innerHTML = `
         <div style="text-align: center; padding: 20px;">
@@ -36,29 +81,4 @@ function showError(container) {
             </p>
         </div>
     `;
-}
-
-// Display products on the page
-function displayProducts(products) {
-    const productList = document.getElementById("product-list");
-
-    const productCards = products.map(product => `
-        <div class="card">
-            <img src="${product.image}" alt="${product.name}">
-            <div class="card-content">
-                <h3>${product.name}</h3>
-                <p>${product.weight}</p>
-                <p>₹${product.price}</p>
-                <button onclick="addToCart('${product.id}')">Add to Cart</button>
-            </div>
-        </div>
-    `).join("");
-
-    productList.innerHTML = productCards;
-}
-
-// Add to cart function
-function addToCart(productId) {
-    console.log(`Added product ${productId} to cart`);
-    alert("Product added to cart!");
 }

@@ -58,10 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 const userCredential = await signInWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
 
-                // Save login info securely in sessionStorage
+                // Save login info securely in localStorage
                 const idToken = await user.getIdToken();
-                sessionStorage.setItem("userToken", idToken);
-                sessionStorage.setItem("userEmail", user.email);
+                localStorage.setItem("userToken", idToken);
+                localStorage.setItem("userEmail", user.email);
 
                 // Redirect to home page
                 window.location.href = "../../index.html";
@@ -84,4 +84,3 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
-
