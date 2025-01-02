@@ -2,6 +2,22 @@ document.addEventListener('DOMContentLoaded', () => {
     displayCart();
     updateCartSummary();
     document.getElementById('checkout-btn').addEventListener('click', handleCheckout);
+    
+    // Event delegation for cart item actions
+    document.getElementById('cart-items').addEventListener('click', (e) => {
+        const button = e.target.closest('button');
+        if (!button) return;
+        
+        const id = button.closest('.cart-item')?.dataset.id;
+        if (!id) return;
+
+        if (button.classList.contains('quantity-btn')) {
+            const change = button.textContent === '+' ? 1 : -1;
+            updateQuantity(id, change);
+        } else if (button.classList.contains('remove-btn')) {
+            removeFromCart(id);
+        }
+    });
 });
 
 function displayCart() {
@@ -26,12 +42,12 @@ function displayCart() {
                 <p>${item.weight}</p>
                 <p>₹${item.price.toFixed(2)}</p>
                 <div class="quantity-controls">
-                    <button class="quantity-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
+                    <button class="quantity-btn">-</button>
                     <span>${item.quantity}</span>
-                    <button class="quantity-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+                    <button class="quantity-btn">+</button>
                 </div>
             </div>
-            <button class="remove-btn" onclick="removeFromCart('${item.id}')">
+            <button class="remove-btn">
                 <i class="fas fa-trash"></i>
             </button>
         </div>
@@ -70,14 +86,13 @@ function removeFromCart(productId) {
 }
 
 function handleCheckout() {
+    console.log("Button clicked")
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     if (cart.length === 0) {
         alert('Your cart is empty!');
         return;
     }
-    alert('Thank you for your purchase!');
-    localStorage.removeItem('cart');
-    updateDisplay();
+    window.location.href = '../pages/payment.html';
 }
 
 function updateDisplay() {
