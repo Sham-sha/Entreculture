@@ -50,9 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (username.value.length < 3) {
       usernameError.textContent = "Username must be at least 3 characters.";
       isValid = false;
-    } else if (/[^a-zA-Z0-9-_]/.test(username.value)) {
-      usernameError.textContent = "Username cannot contain special characters like '!@#$%'.";
-      isValid = false;
     }
 
     // Test Case 2: Check if username already exists (Dummy check)
@@ -83,14 +80,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // Test Case 5: Ensure case-insensitivity for emails
     const normalizedEmail = email.value.trim().toLowerCase();
 
-    // Test Case 6: Password validation
+    // Password Validation Rule: 
+    // At least 8 characters, one uppercase letter, one lowercase letter, one number, one special character, and no spaces.
+    const strongPasswordRegex = /^(?!.*\s)(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
     if (password.value.trim() === "") {
       passwordError.textContent = "Password is required.";
       isValid = false;
     } else if (!strongPasswordRegex.test(password.value)) {
-      passwordError.textContent = "Password must be at least 6 characters long and include at least one letter and one number.";
+      passwordError.textContent =
+        "Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, one number, one special character, and must not contain spaces.";
       isValid = false;
     }
+
 
     // Test Case 7: Confirm password validation
     if (confirmPassword.value.trim() === "") {
