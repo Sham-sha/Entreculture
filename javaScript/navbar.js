@@ -4,9 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // Check login status
     const isLoggedIn = localStorage.getItem("userToken");
 
-    // Function to load and display the appropriate navbar
-    const loadNavbar = (filePath) => {
-        fetch(filePath)
+    // Cache navbar HTML to reduce load time
+    const cacheNavbar = (key, filePath) => {
+        const cachedHTML = localStorage.getItem(key);
+        if (cachedHTML) {
+            return Promise.resolve(cachedHTML);
+        }
+        return fetch(filePath)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Failed to load navbar");
@@ -14,14 +18,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 return response.text();
             })
             .then((html) => {
-                navbarPlaceholder.innerHTML = html;
+                localStorage.setItem(key, html);
+                return html;
+            });
+    };
 
-                // Attach event listeners to navbar links
+    // Load and display the appropriate navbar
+    const loadNavbar = (filePath, cacheKey) => {
+        cacheNavbar(cacheKey, filePath)
+            .then((html) => {
+                navbarPlaceholder.innerHTML = html;
                 attachNavbarListeners();
             })
-            .catch((error) => {
-                console.error("Error loading navbar:", error);
-            });
+            .catch((error) => console.error("Error loading navbar:", error));
     };
 
     // Attach event listeners to navbar links
@@ -66,8 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Determine which navbar to load
     if (isLoggedIn) {
-        loadNavbar("/pages/navbarLogin.html");
+        loadNavbar("/pages/navbarLogin.html", "loggedInNavbar");
     } else {
-        loadNavbar("/pages/navbar.html");
+        loadNavbar("/pages/navbar.html", "loggedOutNavbar");
     }
 });

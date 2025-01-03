@@ -38,12 +38,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let isValid = true;
 
-        // Validate email and password fields
+        // Enhanced email validation
         if (!email) {
             emailError.textContent = "Email is required.";
             isValid = false;
-        } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+        } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
             emailError.textContent = "Please enter a valid email address.";
+            isValid = false;
+        } else if (email.length > 320) {
+            emailError.textContent = "Email cannot exceed 320 characters.";
+            isValid = false;
+        } else if (/[^a-zA-Z0-9@._%+-]/.test(email)) {
+            emailError.textContent = "Email contains invalid characters.";
             isValid = false;
         }
 

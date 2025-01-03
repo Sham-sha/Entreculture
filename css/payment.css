@@ -1,61 +1,125 @@
-body {
-    font-family: Arial, sans-serif;
+* {
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
 }
 
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-}
-
-header nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 10px;
-}
-
-main {
-    padding: 2rem;
+body {
+    background-color: #f7f7f7;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
 .payment-container {
-    max-width: 400px;
-    margin: 0 auto;
-    background: white;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.payment-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.payment-header h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.payment-header p {
+    color: #666;
+}
+
+.order-summary {
+    background-color: #f8f9fa;
+    padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
+    margin-bottom: 30px;
 }
 
-form label {
+.order-summary h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+#summary-details p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.form-section {
+    margin-bottom: 30px;
+}
+
+.form-section h3 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+label {
     display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 500;
 }
 
-form input {
+input {
     width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
+    padding: 12px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s;
 }
 
-form button {
-    width: 100%;
-    padding: 0.8rem;
+input:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.pay-button {
     background-color: #4CAF50;
     color: white;
+    padding: 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    font-size: 1rem;
+    transition: background-color 0.3s;
 }
 
-form button:hover {
+.pay-button:hover {
     background-color: #45a049;
+}
+
+@media (max-width: 480px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .payment-container {
+        padding: 20px;
+    }
 }
