@@ -1,13 +1,13 @@
-/* Reset */
+/* Reset some default browser styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 /* General Body */
 body {
-    font-family: Arial, sans-serif;
     line-height: 1.6;
     padding-top: 70px; /* Adjust this padding to match the height of your navbar */
 }

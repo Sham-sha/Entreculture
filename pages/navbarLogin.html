@@ -1,47 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Navbar-Account</title>
-    <link rel="stylesheet" href="../css/navbarLogin.css">
-    <link rel="shortcut icon" href="https://res.cloudinary.com/dmff4imdi/image/upload/v1733246969/logo/xaccpbca6fozqqcpdvnx.png" type="image/x-icon">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-</head>
-<body>
+    <link rel="stylesheet" href="../css/navbarLogin.css" />
+    <link
+      rel="shortcut icon"
+      href="https://res.cloudinary.com/dmff4imdi/image/upload/v1733246969/logo/xaccpbca6fozqqcpdvnx.png"
+      type="image/x-icon"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+    <!-- Path to the above JavaScript file -->
+  </head>
+  <body>
     <nav class="navbar">
-        <!-- Left: Logo and Paragraph -->
-        <div class="logo-container" id="home">
-          <a href="/index.html" class="logo">
-            <img src="../assets/logo.png" alt="Logo">
-            
-          </a>
-          <p>Entreculture</p>
+      <!-- Left: Logo and Paragraph -->
+      <div class="logo-container" id="home">
+        <a href="/index.html" class="logo">
+          <img src="../assets/logo.png" alt="Logo" />
+        </a>
+        <p>Entreculture</p>
+      </div>
+
+      <!-- Right: Menu Items -->
+      <div class="menu">
+        <!-- Search -->
+        <div class="menu-item" id="search">
+          <i class="fas fa-search"></i>
+          <span>Search</span>
         </div>
-    
-        <!-- Right: Menu Items -->
-        <div class="menu">
-          <!-- Search -->
-          <div class="menu-item" id="search">
-            <i class="fas fa-search"></i>
-            <span>Search</span>
-          </div>
-          <!-- Account Dropdown -->
-          <div class="menu-item dropdown" id="account">
-            <i class="fas fa-user"></i>
-            <span>Account</span>
-            <div class="dropdown-menu">
-              <a href="/profile.html" class="dropdown-item">Profile</a>
-              <a href="../index.html" class="dropdown-item" id="logout">Log Out</a>
-            </div>
-          </div>
-          <!-- Cart -->
-          <div class="menu-item" id="cart">
-            <i class="fas fa-shopping-cart"></i>
-            <span>Cart</span>
+      
+        <!-- Account Dropdown -->
+        <div class="menu-item dropdown" id="account">
+          <i class="fas fa-user"></i>
+          <span>Account</span>
+          <div class="dropdown-menu">
+            <a
+              href="../pages/admin.html"
+              class="dropdown-item"
+              id="admin"
+              style="display: none"
+              >Admin</a
+            >
+            <a href="../index.html" class="dropdown-item" id="logout"
+              >Log Out</a
+            >
           </div>
         </div>
-      </nav>
-      <script src="/javaScript/navbar.js"></script>
-</body>
+        <!-- Cart -->
+        <div class="menu-item" id="cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span>Cart</span>
+        </div>
+      </div>
+    </nav>
+  </body>
 </html>
