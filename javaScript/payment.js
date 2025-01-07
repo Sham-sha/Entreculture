@@ -1,64 +1,88 @@
-document.addEventListener('DOMContentLoaded', () => {
+// Wait until the DOM is fully loaded before running the scripts
+document.addEventListener('DOMContentLoaded', function () {
     displayOrderSummary();
     setupFormValidation();
 });
 
+// Function to display the order summary
 function displayOrderSummary() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    // Get cart data from local storage (or use an empty array if no data exists)
+    var cart = JSON.parse(localStorage.getItem('cart')) || [];
+    var totalItems = 0;
+    var totalAmount = 0;
 
+    // Calculate total items and total amount
+    for (let i = 0; i < cart.length; i++) {
+        totalItems += cart[i].quantity;
+        totalAmount += cart[i].price * cart[i].quantity;
+    }
+
+    // Update the page with totals
     document.getElementById('total-items').textContent = totalItems;
     document.getElementById('total-amount').textContent = totalAmount.toFixed(2);
     document.getElementById('pay-amount').textContent = totalAmount.toFixed(2);
 }
 
+// Function to set up form validation and payment process
 function setupFormValidation() {
-    const form = document.getElementById('payment-form');
-    const cardNumber = document.getElementById('card-number');
-    const expiry = document.getElementById('expiry');
-    const cvv = document.getElementById('cvv');
-    const pincode = document.getElementById('pincode');
+    let form = document.getElementById('payment-form');
+    let cardNumber = document.getElementById('card-number');
+    let expiry = document.getElementById('expiry');
+    let cvv = document.getElementById('cvv');
+    let pincode = document.getElementById('pincode');
 
-    // Format card number with spaces
-    cardNumber.addEventListener('input', (e) => {
-        let value = e.target.value.replace(/\s/g, '');
-        value = value.replace(/\D/g, '');
-        value = value.replace(/(\d{4})/g, '$1 ').trim();
-        e.target.value = value;
+    // Format the card number with spaces every 4 digits
+    cardNumber.addEventListener('input', function (event) {
+        let value = event.target.value.replace(/\s/g, ''); // Remove spaces
+        value = value.replace(/\D/g, ''); // Remove non-digit characters
+        value = value.replace(/(\d{4})/g, '$1 ').trim(); // Add space every 4 digits
+        event.target.value = value;
     });
 
-    // Format expiry date
-    expiry.addEventListener('input', (e) => {
-        let value = e.target.value.replace(/\D/g, '');
+    // Format the expiry date as MM/YY
+    expiry.addEventListener('input', function (event) {
+        let value = event.target.value.replace(/\D/g, ''); // Remove non-digit characters
         if (value.length >= 2) {
-            value = value.slice(0, 2) + '/' + value.slice(2);
+            value = value.slice(0, 2) + '/' + value.slice(2); // Add '/' after MM
         }
-        e.target.value = value;
+        event.target.value = value;
     });
 
-    // Allow only numbers for CVV
-    cvv.addEventListener('input', (e) => {
-        e.target.value = e.target.value.replace(/\D/g, '');
+    // Allow only digits for CVV
+    cvv.addEventListener('input', function (event) {
+        event.target.value = event.target.value.replace(/\D/g, '');
     });
 
-    // Allow only numbers for pincode
-    pincode.addEventListener('input', (e) => {
-        e.target.value = e.target.value.replace(/\D/g, '');
+    // Allow only digits for PIN code
+    pincode.addEventListener('input', function (event) {
+        event.target.value = event.target.value.replace(/\D/g, '');
     });
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // Simulate payment processing
-        const button = form.querySelector('button');
+    // Handle form submission
+    form.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Disable the button and show processing text
+        var button = form.querySelector('button');
         button.disabled = true;
         button.textContent = 'Processing...';
 
-        setTimeout(() => {
-            alert('Payment successful! Thank you for your purchase.');
+        // Simulate payment processing with a delay
+        setTimeout(function () {
+            // Fade out the payment form
+            document.querySelector('.payment-container').style.opacity = '0';
+
+            // Show the success animation
+            let successAnimation = document.getElementById('success-animation');
+            successAnimation.classList.add('show');
+
+            // Clear the cart from local storage
             localStorage.removeItem('cart');
-            window.location.href = '/index.html';
-        }, 2000);
+
+            // Redirect to homepage after showing success animation
+            setTimeout(function () {
+                window.location.href = '/index.html';
+            }, 3000); // Redirect after 3 seconds
+        }, 2000); // Simulate payment processing for 2 seconds
     });
 }

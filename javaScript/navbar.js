@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const navbarPlaceholder = document.getElementById("navbar-placeholder");
 
-    // Check login status
+    // Check if the user is logged in (using localStorage or other methods)
     const isLoggedIn = localStorage.getItem("userToken");
 
     // Cache navbar HTML to reduce load time
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     };
 
-    // Load and display the appropriate navbar
+    // Load and display the appropriate navbar based on login status
     const loadNavbar = (filePath, cacheKey) => {
         cacheNavbar(cacheKey, filePath)
             .then((html) => {
@@ -40,43 +40,75 @@ document.addEventListener("DOMContentLoaded", () => {
         const login = document.getElementById("login");
         const logout = document.getElementById("logout");
         const cart = document.getElementById("cart");
+        const admin = document.getElementById("admin");
 
+        // Array of admin emails
+        const adminEmails = [
+            "entrecultureadmin0809@gmail.com",
+            "admin2@example.com",
+            "admin3@example.com"
+        ];
+
+        // Check if logged-in user is an admin
+        const loggedInEmail = localStorage.getItem("userEmail"); // Get email stored in localStorage
+
+        // Display admin button if the user is an admin
+        if (admin && adminEmails.includes(loggedInEmail)) {
+            admin.style.display = "block";
+        } else if (admin) {
+            admin.style.display = "none";
+        }
+
+        // Home button
         if (home) {
             home.addEventListener("click", () => {
-                window.location.href = "/index.html";
+                window.location.href = "../index.html";
             });
         }
 
+        // Search button
         if (search) {
             search.addEventListener("click", () => {
-                window.location.href = "/pages/search.html";
+                window.location.href = "../pages/search.html";
             });
         }
 
+        // Login button
         if (login) {
             login.addEventListener("click", () => {
-                window.location.href = "/pages/login.html";
+                window.location.href = "../pages/login.html";
             });
         }
 
+        // Logout button
         if (logout) {
             logout.addEventListener("click", () => {
                 localStorage.clear();
-                window.location.href = "/index.html"; // Redirect to the homepage
+                window.location.href = "../index.html"; // Redirect to the homepage
             });
         }
 
+        // Cart button
         if (cart) {
             cart.addEventListener("click", () => {
-                window.location.href = "/pages/cart.html";
+                window.location.href = "../pages/cart.html";
+            });
+        }
+
+        // Admin button logic
+        if (admin) {
+            admin.addEventListener("click", () => {
+                if (adminEmails.includes(loggedInEmail)) {
+                    window.location.href = "../pages/admin.html"; // Navigate to the admin page
+                }
             });
         }
     };
 
-    // Determine which navbar to load
+    // Determine which navbar to load based on login status
     if (isLoggedIn) {
-        loadNavbar("/pages/navbarLogin.html", "loggedInNavbar");
+        loadNavbar("../pages/navbarLogin.html", "loggedInNavbar");
     } else {
-        loadNavbar("/pages/navbar.html", "loggedOutNavbar");
+        loadNavbar("../pages/navbar.html", "loggedOutNavbar");
     }
 });

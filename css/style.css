@@ -1,8 +1,9 @@
-/* Reset and base styles */
+/* Reset some default browser styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 body {
@@ -17,7 +18,7 @@ body {
     width: 96%;
     height: 500px;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                url('https://res.cloudinary.com/dmff4imdi/image/upload/v1733247092/ovandr14g6toz2lncjmh.jpg') 
+                url('../assets/images/hero.jpg') 
                 no-repeat center center/cover;
     border-radius: 20px;
     display: flex;

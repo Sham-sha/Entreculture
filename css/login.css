@@ -1,12 +1,12 @@
-/* Reset some default styles */
+/* Reset some default browser styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     min-height: 100vh;
     display: flex;
     justify-content: center;
