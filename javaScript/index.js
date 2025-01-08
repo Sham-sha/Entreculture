@@ -1,57 +1,57 @@
-// Wait for the DOM to be fully loaded
+// Run this code only after the HTML document is fully loaded
 document.addEventListener('DOMContentLoaded', function () {
-    // Add click handler for CTA button (smooth scrolling to categories section)
     const ctaButton = document.querySelector('.cta-button');
+
+    // Add a smooth scroll effect when the CTA button is clicked
     if (ctaButton) {
         ctaButton.addEventListener('click', function () {
-            // Scroll to categories section
-            document.getElementById('categories').scrollIntoView({
-                behavior: 'smooth'
-            });
+            const categoriesSection = document.getElementById('categories');
+            if (categoriesSection) {
+                categoriesSection.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     }
 
-    // Load categories after fetching the JSON
+    // Fetch and display category data
     fetchCategories();
 });
 
-// Function to fetch categories from a JSON file
+// Fetch category data from a JSON file
 function fetchCategories() {
     fetch('../data/categories.json')
         .then(response => {
-            // Check if the response is valid (HTTP status 200)
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error('Failed to load categories'); // Handle fetch errors
             }
             return response.json();
         })
         .then(categories => {
-            console.log('Categories loaded:', categories); // Log the categories data
-            loadCategories(categories); // Call loadCategories function with the fetched data
+            displayCategories(categories); // Pass the fetched data to be displayed
         })
         .catch(error => {
-            console.error('Error fetching categories:', error); // Log the error if fetch fails
+            console.error('Error:', error); // Log errors for debugging
         });
 }
 
-// Function to load categories into the page
-function loadCategories(categories) {
+// Display fetched categories dynamically
+function displayCategories(categories) {
     const categoryContainer = document.getElementById('category-container');
-    
-    // Clear existing categories before adding new ones
-    categoryContainer.innerHTML = '';
-    
-    // Add each category dynamically
-    categories.forEach(category => {
-        const categoryCard = createCategoryCard(category);
-        categoryContainer.appendChild(categoryCard);
-    });
+
+    if (categoryContainer) {
+        categoryContainer.innerHTML = ''; // Clear existing content
+        categories.forEach(category => {
+            const card = createCategoryCard(category); // Create a card for each category
+            categoryContainer.appendChild(card); // Add the card to the container
+        });
+    }
 }
 
-// Function to create a category card dynamically
+// Create a category card with the given data
 function createCategoryCard(category) {
     const card = document.createElement('div');
     card.className = 'category-card';
+
+    // Add image, title, and description to the card
     card.innerHTML = `
         <img src="${category.image}" alt="${category.name}">
         <div class="category-card-content">
@@ -60,11 +60,10 @@ function createCategoryCard(category) {
         </div>
     `;
 
-    // Add click handler for category card
+    // Redirect to the category-specific page when the card is clicked
     card.addEventListener('click', function () {
-        // Navigate to a specific page for the category
-        window.location.href = `/pages/${category.name.toLowerCase()}.html`; 
+        window.location.href = `/pages/${category.name.toLowerCase()}.html`;
     });
 
-    return card;
+    return card; // Return the created card
 }

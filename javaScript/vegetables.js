@@ -1,3 +1,4 @@
+// Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getDatabase, ref, query, orderByChild, equalTo, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
@@ -14,111 +15,115 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Wait for DOM content to load
-document.addEventListener("DOMContentLoaded", () => {
-    showLoadingAnimation();
-    loadProductsByCategory("Vegetables"); // Example: Load products of category "Fruits"
+// Run code after the page loads
+window.addEventListener("DOMContentLoaded", () => {
+    showLoadingMessage();
+    fetchProductsByCategory("Vegetables");
 });
 
-// Load products from Firebase by category
-async function loadProductsByCategory(category) {
-    const productList = document.getElementById("product-list");
+// Fetch products from Firebase by category
+function fetchProductsByCategory(category) {
+    const productContainer = document.getElementById("product-list");
 
-    try {
-        // Reference the "products" node in Firebase
-        const productsRef = ref(database, "products");
+    // Create a reference and query for the category
+    const productsRef = ref(database, "products");
+    const categoryQuery = query(productsRef, orderByChild("category"), equalTo(category));
 
-        // Query products by category
-        const categoryQuery = query(productsRef, orderByChild("category"), equalTo(category));
+    // Listen for data changes
+    onValue(categoryQuery, (snapshot) => {
+        if (snapshot.exists()) {
+            const products = [];
 
-        onValue(categoryQuery, (snapshot) => {
-            if (snapshot.exists()) {
-                const products = [];
-                snapshot.forEach((childSnapshot) => {
-                    const product = { id: childSnapshot.key, ...childSnapshot.val() };
-                    products.push(product);
-                });
-                displayProducts(products);
-            } else {
-                showError(productList);
-            }
-        });
-    } catch (error) {
-        console.error("Error loading products:", error);
-        showError(productList);
-    } finally {
-        hideLoadingAnimation();
-    }
+            // Collect product data
+            snapshot.forEach((productSnapshot) => {
+                const productData = productSnapshot.val();
+                const productId = productSnapshot.key;
+                products.push({ id: productId, ...productData });
+            });
+
+            // Display the products
+            renderProducts(products);
+        } else {
+            showErrorMessage(productContainer, "No products found.");
+        }
+    }, (error) => {
+        console.error("Error fetching products:", error);
+        showErrorMessage(productContainer, "Failed to load products.");
+    });
+
+    hideLoadingMessage();
 }
 
 // Display products on the page
-function displayProducts(products) {
-    const productList = document.getElementById("product-list");
-    const productCards = products.map((product) => `
-        <div class="card">
-            <img src="${product.imageUrl}" alt="${product.name}">
-            <div class="card-content">
-                <h3>${product.name}</h3>
-                <p>Weight: 1kg</p>
-                <p>Price: ₹${product.price}</p>
-                <button onclick="addToCart('${product.id}', '${product.name}', '${product.imageUrl}', ${product.price})">
-                    Add to Cart
-                </button>
-            </div>
-        </div>
-    `).join("");
-    productList.innerHTML = productCards;
+function renderProducts(products) {
+    const productContainer = document.getElementById("product-list");
+
+    // Create HTML for each product
+    const productHTML = products.map((product) => {
+        return `
+            <div class="card">
+                <img src="${product.imageUrl}" alt="${product.name}">
+                <div class="card-content">
+                    <h3>${product.name}</h3>
+                    <p>Weight: 1kg</p>
+                    <p>Price: ₹${product.price}</p>
+                    <button onclick="addToCart('${product.id}', '${product.name}', '${product.imageUrl}', ${product.price})">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>`;
+    }).join("");
+
+    productContainer.innerHTML = productHTML;
 }
 
-// Add a product to the cart
+// Add product to cart
 window.addToCart = function (id, name, imageUrl, price) {
+    // Get the cart from localStorage
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const existingItem = cart.find((item) => item.id === id);
 
-    if (existingItem) {
-        existingItem.quantity += 1;
+    // Check if the product is already in the cart
+    const existingProduct = cart.find((item) => item.id === id);
+
+    if (existingProduct) {
+        existingProduct.quantity += 1;
     } else {
         cart.push({ id, name, imageUrl, price, quantity: 1 });
     }
 
+    // Save the updated cart
     localStorage.setItem("cart", JSON.stringify(cart));
-    showPopup(`${name} added to cart!`);
+    showPopupMessage(`${name} added to cart!`);
 };
 
-// Show a popup message
-function showPopup(message) {
+// Show popup message
+function showPopupMessage(message) {
     const popup = document.createElement("div");
     popup.className = "cart-popup";
     popup.textContent = message;
-
     document.body.appendChild(popup);
 
-    // Remove the popup after animation ends
     setTimeout(() => {
         popup.classList.add("hide");
         popup.addEventListener("transitionend", () => popup.remove());
     }, 2000);
 }
 
-// Loading animation
-function showLoadingAnimation() {
-    const productList = document.getElementById("product-list");
-    productList.innerHTML = `<p class="loading">Loading products, please wait...</p>`;
+// Show loading message
+function showLoadingMessage() {
+    const productContainer = document.getElementById("product-list");
+    productContainer.innerHTML = `<p class="loading">Loading products, please wait...</p>`;
 }
 
-// Hide loading animation
-function hideLoadingAnimation() {
-    const productList = document.getElementById("product-list");
-    productList.innerHTML = ""; // Clear loading message
+// Hide loading message
+function hideLoadingMessage() {
+    const productContainer = document.getElementById("product-list");
+    productContainer.innerHTML = "";
 }
 
-// Show an error message
-function showError(container) {
-    container.innerHTML = `
-        <div style="text-align: center; padding: 20px;">
-            <p style="color: #e74c3c; font-size: 1.1em;">
-                Sorry, we couldn't load the products. Please try again later.
-            </p>
-        </div>
-    `;
+// Show error message
+function showErrorMessage(container, message) {
+    container.innerHTML = `<div style="text-align: center; padding: 20px;">
+        <p style="color: #e74c3c; font-size: 1.1em;">${message}</p>
+    </div>`;
 }

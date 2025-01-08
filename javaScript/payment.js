@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
 // Function to display the order summary
 function displayOrderSummary() {
     // Get cart data from local storage (or use an empty array if no data exists)
-    var cart = JSON.parse(localStorage.getItem('cart')) || [];
-    var totalItems = 0;
-    var totalAmount = 0;
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let totalItems = 0;
+    let totalAmount = 0;
 
     // Calculate total items and total amount
     for (let i = 0; i < cart.length; i++) {
