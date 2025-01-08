@@ -11,6 +11,7 @@ const firebaseConfig = {
     appId: "1:26756746313:web:899812d4cad707d232c398",
 };
 
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
@@ -26,12 +27,6 @@ const deleteSelectedBtn = document.getElementById('deleteSelectedBtn');
 let isEditing = false;
 let editingProductId = null;
 
-// Prevent form submission on Enter key
-form.addEventListener('keydown', function (event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-    }
-});
 
 // Event listener for form submission
 submitButton.addEventListener('click', handleFormSubmit);
@@ -44,8 +39,8 @@ deleteSelectedBtn.addEventListener('click', handleDeleteSelected);
 function fetchProducts() {
     const productsRef = ref(database, 'products');
 
-    onValue(productsRef, function (snapshot) {
-        const products = snapshot.val();
+    onValue(productsRef, function (getProduct) {
+        const products = getProduct.val();
         productList.innerHTML = '';
 
         if (products) {
