@@ -23,13 +23,13 @@ function loadProducts() {
     const productGrid = document.getElementById("productGrid");
     const productsRef = ref(database, "products");
 
-    onValue(productsRef, (snapshot) => {
-        if (snapshot.exists()) {
+    onValue(productsRef, (getProduct) => {
+        if (getProduct.exists()) {
             allProducts = [];
-            snapshot.forEach((childSnapshot) => {
+            getProduct.forEach((childgetProduct) => {
                 const product = {
-                    id: childSnapshot.key,
-                    ...childSnapshot.val(),
+                    id: childgetProduct.key,
+                    ...childgetProduct.val(),
                 };
                 allProducts.push(product);
             });

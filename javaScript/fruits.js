@@ -30,14 +30,14 @@ function fetchProductsByCategory(category) {
     const categoryQuery = query(productsRef, orderByChild("category"), equalTo(category));
 
     // Listen for data changes
-    onValue(categoryQuery, (snapshot) => {
-        if (snapshot.exists()) {
+    onValue(categoryQuery, (getProduct) => {
+        if (getProduct.exists()) {
             const products = [];
 
             // Collect product data
-            snapshot.forEach((productSnapshot) => {
-                const productData = productSnapshot.val();
-                const productId = productSnapshot.key;
+            getProduct.forEach((productgetProduct) => {
+                const productData = productgetProduct.val();
+                const productId = productgetProduct.key;
                 products.push({ id: productId, ...productData });
             });
 
