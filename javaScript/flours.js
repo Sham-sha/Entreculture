@@ -1,124 +1,96 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getDatabase, ref, query, orderByChild, equalTo, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
-
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyAhx3Qp8Qg23w6bWkcsWYrXtlg46I7_1PA",
-    authDomain: "entreculture-project.firebaseapp.com",
-    databaseURL: "https://entreculture-project-default-rtdb.firebaseio.com",
-    projectId: "entreculture-project",
-    appId: "1:26756746313:web:899812d4cad707d232c398",
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-
-// Wait for DOM content to load
-document.addEventListener("DOMContentLoaded", () => {
-    showLoadingAnimation();
-    loadProductsByCategory("Flours"); // Example: Load products of category "Fruits"
+// Wait for the page to fully load before running the script
+document.addEventListener('DOMContentLoaded', () => {
+    loadProducts(); // Load and display products from Firebase
+    setupSearch(); // Add event listener for search input
 });
 
-// Load products from Firebase by category
-async function loadProductsByCategory(category) {
-    const productList = document.getElementById("product-list");
+// Array to hold products
+let allProducts = [];
 
-    try {
-        // Reference the "products" node in Firebase
-        const productsRef = ref(database, "products");
+// Load products from Firebase and display them
+function loadProducts() {
+    const productGrid = document.getElementById("productGrid");
+    const productsRef = ref(database, "products");
 
-        // Query products by category
-        const categoryQuery = query(productsRef, orderByChild("category"), equalTo(category));
-
-        onValue(categoryQuery, (snapshot) => {
-            if (snapshot.exists()) {
-                const products = [];
-                snapshot.forEach((childSnapshot) => {
-                    const product = { id: childSnapshot.key, ...childSnapshot.val() };
-                    products.push(product);
-                });
-                displayProducts(products);
-            } else {
-                showError(productList);
-            }
-        });
-    } catch (error) {
-        console.error("Error loading products:", error);
-        showError(productList);
-    } finally {
-        hideLoadingAnimation();
-    }
+    onValue(productsRef, (snapshot) => {
+        if (snapshot.exists()) {
+            allProducts = [];
+            snapshot.forEach((childSnapshot) => {
+                const product = {
+                    id: childSnapshot.key,
+                    ...childSnapshot.val(),
+                };
+                allProducts.push(product);
+            });
+            displayProducts(allProducts);
+        } else {
+            productGrid.innerHTML = "<p>No products found.</p>";
+        }
+    });
 }
 
-// Display products on the page
+// Display products in the grid
 function displayProducts(products) {
-    const productList = document.getElementById("product-list");
-    const productCards = products.map((product) => `
-        <div class="card">
-            <img src="${product.imageUrl}" alt="${product.name}">
-            <div class="card-content">
-                <h3>${product.name}</h3>
+    const productGrid = document.getElementById("productGrid");
+    productGrid.innerHTML = ""; // Clear the product grid
+
+    products.forEach((product) => {
+        const productElement = document.createElement("div");
+        productElement.classList.add("product-card");
+
+        productElement.innerHTML = `
+            <img src="${product.imageUrl}" alt="${product.name}" class="product-image">
+            <div class="product-info">
+                <h3 class="product-name">${product.name}</h3>
                 <p>Weight: 1kg</p>
-                <p>Price: ₹${product.price}</p>
-                <button onclick="addToCart('${product.id}', '${product.name}', '${product.imageUrl}', ${product.price})">
+                <p class="product-price">₹${product.price}</p>
+                <button class="add-to-cart" onclick="addToCart('${product.id}', '${product.name}', '${product.imageUrl}', ${product.price})">
                     Add to Cart
                 </button>
             </div>
-        </div>
-    `).join("");
-    productList.innerHTML = productCards;
+        `;
+
+        productGrid.appendChild(productElement);
+    });
 }
 
-// Add a product to the cart
+// Add product to the cart
 window.addToCart = function (id, name, imageUrl, price) {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const existingItem = cart.find((item) => item.id === id);
+    const cart = JSON.parse(localStorage.getItem('cart')) || []; // Get cart from localStorage
+    const existingProduct = cart.find((item) => item.id === id);
 
-    if (existingItem) {
-        existingItem.quantity += 1;
+    if (existingProduct) {
+        existingProduct.quantity += 1;
     } else {
         cart.push({ id, name, imageUrl, price, quantity: 1 });
     }
 
-    localStorage.setItem("cart", JSON.stringify(cart));
-    showPopup(`${name} added to cart!`);
+    localStorage.setItem('cart', JSON.stringify(cart)); // Save updated cart
+    showPopupMessage(`${name} added to cart!`);
 };
 
-// Show a popup message
-function showPopup(message) {
-    const popup = document.createElement("div");
-    popup.className = "cart-popup";
+// Show a popup message when an item is added to the cart
+function showPopupMessage(message) {
+    const popup = document.createElement('div');
+    popup.className = 'cart-popup';
     popup.textContent = message;
-
     document.body.appendChild(popup);
 
-    // Remove the popup after animation ends
     setTimeout(() => {
-        popup.classList.add("hide");
-        popup.addEventListener("transitionend", () => popup.remove());
+        popup.classList.add('hide');
+        popup.addEventListener('transitionend', () => popup.remove());
     }, 2000);
 }
 
-// Loading animation
-function showLoadingAnimation() {
-    const productList = document.getElementById("product-list");
-    productList.innerHTML = `<p class="loading">Loading products, please wait...</p>`;
-}
-
-// Hide loading animation
-function hideLoadingAnimation() {
-    const productList = document.getElementById("product-list");
-    productList.innerHTML = ""; // Clear loading message
-}
-
-// Show an error message
-function showError(container) {
-    container.innerHTML = `
-        <div style="text-align: center; padding: 20px;">
-            <p style="color: #e74c3c; font-size: 1.1em;">
-                Sorry, we couldn't load the products. Please try again later.
-            </p>
-        </div>
-    `;
+// Filter products based on search input
+function setupSearch() {
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim().toLowerCase();
+        const filteredProducts = allProducts.filter(product =>
+            product.name.toLowerCase().includes(query) ||
+            product.price.toString().includes(query)
+        );
+        displayProducts(filteredProducts);
+    });
 }

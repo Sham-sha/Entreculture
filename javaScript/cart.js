@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add event listener to the checkout button
     const checkoutButton = document.getElementById('checkout-btn');
     if (checkoutButton) {
+        console.log("Got checkout button")
         checkoutButton.addEventListener('click', handleCheckout);
     }
 
@@ -48,13 +49,16 @@ function displayCart() {
     }
 
     // Display each item in the cart
-    cartContainer.innerHTML = cart.map(item => `
+ // Display each item in the cart
+cartContainer.innerHTML = cart.map(item => {
+    const price = Number(item.price); // Convert price to a number
+    return `
         <div class="cart-item" data-id="${item.id}">
             <img src="${item.imageUrl}" alt="${item.name}">
             <div class="item-details">
                 <h3>${item.name}</h3>
                 <p>Weight: 1kg</p>
-                <p>Price: ₹${item.price.toFixed(2)}</p>
+                <p>Price: ₹${price.toFixed(2)}</p>
                 <div class="quantity-controls">
                     <button class="quantity-btn">-</button>
                     <span>${item.quantity}</span>
@@ -63,7 +67,9 @@ function displayCart() {
             </div>
             <button class="remove-btn">Remove</button>
         </div>
-    `).join('');
+    `;
+}).join('');
+
 }
 
 // Update the total items and price in the cart
