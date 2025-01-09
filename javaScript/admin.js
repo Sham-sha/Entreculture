@@ -42,7 +42,7 @@ function fetchProducts() {
     onValue(productsRef, function (getProduct) {
         const products = getProduct.val();
         productList.innerHTML = '';
-
+        
         if (products) {
             for (let key in products) {
                 const product = products[key];

@@ -20,6 +20,7 @@ body {
     padding: clamp(20px, 4vw, 40px);
     border-radius: 16px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    margin-top: 3%;
 }
 
 h1 {
