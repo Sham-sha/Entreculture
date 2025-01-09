@@ -1,32 +1,36 @@
 document.addEventListener("DOMContentLoaded", () => {
     const navbarPlaceholder = document.getElementById("navbar-placeholder");
 
-    // Check if the user is logged in (using localStorage)
+    // Check if the user is logged in (using localStorage or other methods)
     const isLoggedIn = localStorage.getItem("userToken");
 
-    // Preload both navbars initially (in the background)
-    let loggedInNavbarHTML = '';
-    let loggedOutNavbarHTML = '';
-
-    const preloadNavbars = () => {
-        // Preload both navbars
-        return Promise.all([
-            fetch("../pages/navbarLogin.html").then((response) => response.text()),
-            fetch("../pages/navbar.html").then((response) => response.text())
-        ]).then(([loggedInHTML, loggedOutHTML]) => {
-            loggedInNavbarHTML = loggedInHTML;
-            loggedOutNavbarHTML = loggedOutHTML;
-        }).catch((error) => console.error("Error preloading navbars:", error));
+    // Cache navbar HTML to reduce load time
+    const cacheNavbar = (key, filePath) => {
+        const cachedHTML = localStorage.getItem(key);
+        if (cachedHTML) {
+            return Promise.resolve(cachedHTML);
+        }
+        return fetch(filePath)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to load navbar");
+                }
+                return response.text();
+            })
+            .then((html) => {
+                localStorage.setItem(key, html);
+                return html;
+            });
     };
 
     // Load and display the appropriate navbar based on login status
-    const loadNavbar = () => {
-        if (isLoggedIn) {
-            navbarPlaceholder.innerHTML = loggedInNavbarHTML;
-        } else {
-            navbarPlaceholder.innerHTML = loggedOutNavbarHTML;
-        }
-        attachNavbarListeners();
+    const loadNavbar = (filePath, cacheKey) => {
+        cacheNavbar(cacheKey, filePath)
+            .then((html) => {
+                navbarPlaceholder.innerHTML = html;
+                attachNavbarListeners();
+            })
+            .catch((error) => console.error("Error loading navbar:", error));
     };
 
     // Attach event listeners to navbar links
@@ -101,8 +105,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Preload navbars and then load the appropriate one
-    preloadNavbars().then(() => {
-        loadNavbar(); // Load the correct navbar after preloading
-    });
+    // Determine which navbar to load based on login status
+    if (isLoggedIn) {
+        loadNavbar("../pages/navbarLogin.html", "loggedInNavbar");
+    } else {
+        loadNavbar("../pages/navbar.html", "loggedOutNavbar");
+    }
 });

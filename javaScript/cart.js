@@ -49,28 +49,30 @@ function displayCart() {
     }
 
     // Display each item in the cart
- // Display each item in the cart
-cartContainer.innerHTML = cart.map(item => {
-    const price = Number(item.price); // Convert price to a number
-    return `
-        <div class="cart-item" data-id="${item.id}">
-            <img src="${item.imageUrl}" alt="${item.name}">
-            <div class="item-details">
-                <h3>${item.name}</h3>
-                <p>Weight: 1kg</p>
-                <p>Price: ₹${price.toFixed(2)}</p>
-                <div class="quantity-controls">
-                    <button class="quantity-btn">-</button>
-                    <span>${item.quantity}</span>
-                    <button class="quantity-btn">+</button>
-                </div>
-            </div>
-            <button class="remove-btn">Remove</button>
-        </div>
-    `;
-}).join('');
+    cartContainer.innerHTML = cart.map(item => {
+        const price = Number(item.price); // Convert price to a number
+        const weightPerItem = 1; // Assume each item has an initial weight of 1kg
+        const totalWeight = weightPerItem * item.quantity; // Calculate total weight based on quantity
 
+        return `
+            <div class="cart-item" data-id="${item.id}">
+                <img src="${item.imageUrl}" alt="${item.name}">
+                <div class="item-details">
+                    <h3>${item.name}</h3>
+                    <p>Weight: ${totalWeight}kg</p>
+                    <p>Price: ₹${price.toFixed(2)}</p>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                </div>
+                <button class="remove-btn">Remove</button>
+            </div>
+        `;
+    }).join('');
 }
+
 
 // Update the total items and price in the cart
 function updateCartSummary() {
@@ -90,7 +92,8 @@ function updateQuantity(productId, change) {
     if (item) {
         item.quantity += change;
         if (item.quantity <= 0) {
-            removeFromCart(productId); // Remove item if quantity is zero or less
+            // removeFromCart(productId); // Remove item if quantity is zero or less
+            console.log(productId)
         } else {
             localStorage.setItem('cart', JSON.stringify(cart));
             updateDisplay();
