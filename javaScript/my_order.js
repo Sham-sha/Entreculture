@@ -111,12 +111,7 @@ function createOrderHTML(order) {
                         </div>
                     </div>
                 `).join('')}
-            </div>
-            
-           <div class="estimated-delivery"> 
-                <h2>Estimated Delivery</h2>
-                <p>${formatDateWithoutTime(order.estimatedDelivery)}</p>
-            </div>
+            </div>git add    
 
             <div class="product-list">
                 <h2>Ordered Items</h2>
