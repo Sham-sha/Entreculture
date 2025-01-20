@@ -1,6 +1,6 @@
 // Import Firebase SDK modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getDatabase, ref, push, set, remove, update, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+import { getDatabase, ref, push, set, remove, update, get } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -11,57 +11,60 @@ const firebaseConfig = {
     appId: "1:26756746313:web:899812d4cad707d232c398",
 };
 
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-
 // DOM elements
-const form = document.getElementById('productForm');
+const formElement = document.getElementById('productForm');
 const submitButton = document.getElementById('submitBtn');
-const productList = document.getElementById('productList');
-const deleteSelectedBtn = document.getElementById('deleteSelectedBtn');
+const productListElement = document.getElementById('productList');
+const deleteSelectedButton = document.getElementById('deleteSelectedBtn');
 
-// State variables for editing
+// Variables to manage editing state
 let isEditing = false;
 let editingProductId = null;
-
 
 // Event listener for form submission
 submitButton.addEventListener('click', handleFormSubmit);
 
 // Event listener for deleting selected products
-deleteSelectedBtn.addEventListener('click', handleDeleteSelected);
+deleteSelectedButton.addEventListener('click', handleDeleteSelected);
 
-
-// Fetch and display products
+// Fetch and display products from the database
 function fetchProducts() {
     const productsRef = ref(database, 'products');
 
-    onValue(productsRef, function (getProduct) {
-        const products = getProduct.val();
-        productList.innerHTML = '';
+    get(productsRef).then((snapshot) => {
+        const products = snapshot.val();
+        productListElement.innerHTML = '';
 
         if (products) {
-            for (let key in products) {
-                const product = products[key];
-                const li = document.createElement('li');
-                li.innerHTML = `
-                    <input type="checkbox" class="productCheckbox" data-id="${key}">
+            Object.keys(products).forEach((productId) => {
+                const product = products[productId];
+
+                // Create a list item for each product
+                const productItem = document.createElement('li');
+                productItem.innerHTML = `
+                    <input type="checkbox" class="productCheckbox" data-id="${productId}">
                     <img src="${product.imageUrl}" alt="${product.name}" style="width: 50px; height: 50px;">
                     ${product.name} - ${product.category} - ₹${product.price}
-                    <button class="editBtn" data-id="${key}">Edit</button>
+                    <button class="editButton" data-id="${productId}">Edit</button>
                 `;
-                productList.appendChild(li);
-            }
+
+                productListElement.appendChild(productItem);
+            });
 
             // Add click events to edit buttons
-            const editButtons = document.querySelectorAll('.editBtn');
-            editButtons.forEach(function (button) {
+            const editButtons = document.querySelectorAll('.editButton');
+            editButtons.forEach((button) => {
                 button.addEventListener('click', handleEdit);
             });
+        } else {
+            productListElement.innerHTML = '<p>No products found.</p>';
         }
+    }).catch((error) => {
+        console.error('Error fetching products:', error);
     });
 }
 
@@ -82,32 +85,32 @@ function handleFormSubmit(event) {
     }
 
     if (isEditing) {
-        updateProduct(productName, imageUrl, category, price);
+        updateProductInDatabase(productName, imageUrl, category, price);
     } else {
-        addProduct(productName, imageUrl, category, price);
+        addProductToDatabase(productName, imageUrl, category, price);
     }
 }
 
-// Add a new product
-function addProduct(name, imageUrl, category, price) {
-    const productRef = push(ref(database, 'products'));
+// Add a new product to the database
+function addProductToDatabase(name, imageUrl, category, price) {
+    const newProductRef = push(ref(database, 'products'));
 
-    set(productRef, {
+    set(newProductRef, {
         name: name,
         imageUrl: imageUrl,
         category: category,
         price: price
-    }).then(function () {
+    }).then(() => {
         alert('Product added successfully!');
-        form.reset();
+        formElement.reset();
         fetchProducts();
-    }).catch(function (error) {
-        console.error("Error adding product: ", error);
+    }).catch((error) => {
+        console.error("Error adding product:", error);
     });
 }
 
-// Update an existing product
-function updateProduct(name, imageUrl, category, price) {
+// Update an existing product in the database
+function updateProductInDatabase(name, imageUrl, category, price) {
     const productRef = ref(database, `products/${editingProductId}`);
 
     update(productRef, {
@@ -115,15 +118,15 @@ function updateProduct(name, imageUrl, category, price) {
         imageUrl: imageUrl,
         category: category,
         price: price
-    }).then(function () {
+    }).then(() => {
         alert('Product updated successfully!');
-        form.reset();
+        formElement.reset();
         isEditing = false;
         editingProductId = null;
         submitButton.textContent = "Add Product";
         fetchProducts();
-    }).catch(function (error) {
-        console.error("Error updating product: ", error);
+    }).catch((error) => {
+        console.error("Error updating product:", error);
     });
 }
 
@@ -132,9 +135,11 @@ function handleEdit(event) {
     const productId = event.target.getAttribute('data-id');
     const productRef = ref(database, `products/${productId}`);
 
-    onValue(productRef, function (getProduct) {
-        if (getProduct.exists()) {
-            const product = getProduct.val();
+    get(productRef).then((snapshot) => {
+        if (snapshot.exists()) {
+            const product = snapshot.val();
+
+            // Populate the form with product details
             document.getElementById('productName').value = product.name;
             document.getElementById('imageUrl').value = product.imageUrl;
             document.getElementById('category').value = product.category;
@@ -144,7 +149,9 @@ function handleEdit(event) {
             editingProductId = productId;
             submitButton.textContent = "Update Product";
         }
-    }, { onlyOnce: true });
+    }).catch((error) => {
+        console.error("Error fetching product details:", error);
+    });
 }
 
 // Handle deleting selected products
@@ -156,15 +163,15 @@ function handleDeleteSelected() {
         return;
     }
 
-    selectedCheckboxes.forEach(function (checkbox) {
+    selectedCheckboxes.forEach((checkbox) => {
         const productId = checkbox.getAttribute('data-id');
         const productRef = ref(database, `products/${productId}`);
 
-        remove(productRef).then(function () {
-            alert(`Product deleted successfully!`);
+        remove(productRef).then(() => {
+            console.log(`Product ${productId} deleted successfully.`);
             fetchProducts();
-        }).catch(function (error) {
-            console.error("Error deleting product: ", error);
+        }).catch((error) => {
+            console.error("Error deleting product:", error);
         });
     });
 }
