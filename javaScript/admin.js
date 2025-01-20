@@ -42,7 +42,7 @@ function fetchProducts() {
     onValue(productsRef, function (getProduct) {
         const products = getProduct.val();
         productList.innerHTML = '';
-        
+
         if (products) {
             for (let key in products) {
                 const product = products[key];
@@ -50,7 +50,7 @@ function fetchProducts() {
                 li.innerHTML = `
                     <input type="checkbox" class="productCheckbox" data-id="${key}">
                     <img src="${product.imageUrl}" alt="${product.name}" style="width: 50px; height: 50px;">
-                    ${product.name} - ${product.category} - $${product.price}
+                    ${product.name} - ${product.category} - ₹${product.price}
                     <button class="editBtn" data-id="${key}">Edit</button>
                 `;
                 productList.appendChild(li);

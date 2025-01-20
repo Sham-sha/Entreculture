@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracking</title>
+    <link rel="stylesheet" href="../css/my_order.css">
+    <link rel="shortcut icon" href="https://res.cloudinary.com/dmff4imdi/image/upload/v1733246969/logo/xaccpbca6fozqqcpdvnx.png" type="image/x-icon">
+
+</head>
+<body>
+
+     <!-- Placeholder for Navbar -->
+     <div id="navbar-placeholder"></div>
+
+    <div class="tracking-container">
+        <h1>Order Tracking</h1>
+        
+        <!-- No Order Message -->
+        <div id="no-order" class="no-order-message" style="display: none;">
+            <div class="no-order-content">
+                <h2>No Active Order Found</h2>
+                <p>You currently don't have any active orders to track.</p>
+                <a href="../index.html" class="shop-now-btn">Shop Now</a>
+            </div>
+        </div>
+
+        <!-- Order Content -->
+        <div id="order-content" style="display: none;">
+            <div class="order-info">
+                <p>Order ID: <span id="order-id"></span></p>
+                <p>Order Date: <span id="order-date"></span></p>
+            </div>
+            
+            <div class="tracking-timeline">
+                <div class="tracking-step" id="order-placed">
+                    <div class="step-icon">📦</div>
+                    <div class="step-content">
+                        <h3>Order Placed</h3>
+                        <p class="time"></p>
+                    </div>
+                </div>
+                
+                <div class="tracking-step" id="processing">
+                    <div class="step-icon">🏭</div>
+                    <div class="step-content">
+                        <h3>Processing</h3>
+                        <p class="time"></p>
+                    </div>
+                </div>
+                
+                <div class="tracking-step" id="shipped">
+                    <div class="step-icon">🚚</div>
+                    <div class="step-content">
+                        <h3>Shipped</h3>
+                        <p class="time"></p>
+                    </div>
+                </div>
+                
+                <div class="tracking-step" id="delivered">
+                    <div class="step-icon">✅</div>
+                    <div class="step-content">
+                        <h3>Delivered</h3>
+                        <p class="time"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="estimated-delivery">
+                <h2>Estimated Delivery</h2>
+                <p id="delivery-date"></p>
+            </div>
+
+            <div class="product-list">
+                <h2>Ordered Items</h2>
+                <div id="ordered-items"></div>
+            </div>
+        </div>
+    </div>
+    <script src="../javaScript/my_order.js"></script>
+    <script src="/javaScript/navbar.js" type="module"></script>
+</body>
+</html>

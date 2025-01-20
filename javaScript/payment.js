@@ -76,12 +76,29 @@ function setupFormValidation() {
             let successAnimation = document.getElementById('success-animation');
             successAnimation.classList.add('show');
 
+            // Save cart items for tracking before clearing the cart
+            localStorage.setItem('cartItems', localStorage.getItem('cart'));
+
             // Clear the cart from local storage
             localStorage.removeItem('cart');
 
-            // Redirect to homepage after showing success animation
+            // Initialize tracking data
+            const orderDate = new Date();
+            const orderId = 'ORD' + Math.random().toString(36).substr(2, 9).toUpperCase();
+            
+            const trackingData = {
+                orderId: orderId,
+                orderDate: orderDate,
+                currentStatus: 0,
+                lastUpdate: orderDate,
+                estimatedDelivery: new Date(orderDate.getTime() + (5 * 24 * 60 * 60 * 1000)) // 5 days from order
+            };
+            
+            localStorage.setItem('trackingData', JSON.stringify(trackingData));
+
+            // Redirect to tracking page after showing success animation
             setTimeout(function () {
-                window.location.href = '/index.html';
+                window.location.href = '../pages/my_order.html';
             }, 3000); // Redirect after 3 seconds
         }, 2000); // Simulate payment processing for 2 seconds
     });

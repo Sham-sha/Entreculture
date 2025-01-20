@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const logout = document.getElementById("logout");
         const cart = document.getElementById("cart");
         const admin = document.getElementById("admin");
+        const order = document.getElementById("my-orders");
 
         // Array of admin emails
         const adminEmails = [
@@ -103,6 +104,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
         }
+
+        if (order) {
+            order.addEventListener("click", () => {
+                window.location.href = "../pages/my_order.html";
+            });
+        }
+        
     };
 
     // Determine which navbar to load based on login status
