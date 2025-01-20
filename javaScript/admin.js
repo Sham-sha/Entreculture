@@ -38,10 +38,12 @@ function fetchProducts() {
     get(productsRef).then((snapshot) => {
         const products = snapshot.val();
         productListElement.innerHTML = '';
+        
 
         if (products) {
             Object.keys(products).forEach((productId) => {
                 const product = products[productId];
+                console.table(product)
 
                 // Create a list item for each product
                 const productItem = document.createElement('li');

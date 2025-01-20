@@ -1,8 +1,3 @@
-// Function to generate a random order ID
-function generateOrderId() {
-    return 'ORD' + Math.random().toString(36).substr(2, 9).toUpperCase();
-}
-
 // Function to format date with time
 function formatDateWithTime(date) {
     return new Date(date).toLocaleDateString('en-US', {
@@ -11,15 +6,6 @@ function formatDateWithTime(date) {
         day: 'numeric',
         hour: '2-digit',
         minute: '2-digit'
-    });
-}
-
-// Function to format date without time
-function formatDateWithoutTime(date) {
-    return new Date(date).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
     });
 }
 
@@ -33,44 +19,15 @@ function saveOrders(orders) {
     localStorage.setItem('orders', JSON.stringify(orders));
 }
 
-// Function to initialize a new order and save it
-function initializeNewOrder(cartItems) {
-    const orderDate = new Date();
-    const orderId = generateOrderId();
-    const newOrder = {
-        orderId: orderId,
-        orderDate: orderDate,
-        currentStatus: 0,
-        lastUpdate: orderDate,
-        estimatedDelivery: new Date(orderDate.getTime() + (3 * 60 * 1000)), // Simulated 3-minute delivery for demo
-        items: cartItems
-    };
-
-    const orders = getAllOrders();
-    orders.push(newOrder);
-    saveOrders(orders);
-
-    return newOrder;
-}
-
-// Function to check if there are active orders
-function hasActiveOrders() {
-    return getAllOrders().length > 0;
-}
-
-// Function to update the tracking status of all orders
+// Function to dynamically update the tracking status of all orders
 function updateTrackingStatus() {
-    if (!hasActiveOrders()) {
-        return;
-    }
-
-    let orders = getAllOrders();
+    const orders = getAllOrders();
     const now = new Date();
 
-    orders = orders.map(order => {
+    orders.forEach(order => {
         const elapsedMinutes = (now - new Date(order.orderDate)) / (1000 * 60); // Elapsed minutes since orderDate
 
-        // Update the currentStatus based on elapsed time
+        // Update the currentStatus dynamically based on elapsed time
         if (elapsedMinutes >= 3) {
             order.currentStatus = 3; // Delivered
         } else if (elapsedMinutes >= 2) {
@@ -80,12 +37,10 @@ function updateTrackingStatus() {
         } else {
             order.currentStatus = 0; // Order Placed
         }
-
-        return order;
     });
 
     saveOrders(orders); // Save updated orders
-    updateTrackingDisplay(); // Refresh the display
+    updateTrackingDisplay(); // Refresh the display to reflect updated order statuses
 }
 
 // Function to create HTML for one order
@@ -103,11 +58,10 @@ function createOrderHTML(order) {
                         <div class="step-icon">${['📦', '🏭', '🚚', '✅'][index]}</div>
                         <div class="step-content">
                             <h3>${step}</h3>
-                            <p class="time">${
-                                index <= order.currentStatus 
-                                    ? formatDateWithTime(new Date(order.orderDate).getTime() + (index * 60 * 1000))
-                                    : 'Pending'
-                            }</p>
+                            <p class="time">${index <= order.currentStatus
+            ? formatDateWithTime(new Date(order.orderDate).getTime() + (index * 60 * 1000))
+            : 'Pending'
+        }</p>
                         </div>
                     </div>
                 `).join('')}
@@ -137,35 +91,50 @@ function createOrderHTML(order) {
 function updateTrackingDisplay() {
     const noOrderElement = document.getElementById('no-order');
     const orderContentElement = document.getElementById('order-content');
+    const orders = getAllOrders();
 
-    if (!hasActiveOrders()) {
+    if (orders.length === 0) {
         noOrderElement.style.display = 'block';
         orderContentElement.style.display = 'none';
-        return;
+    } else {
+        noOrderElement.style.display = 'none';
+        orderContentElement.style.display = 'block';
+        orderContentElement.innerHTML = orders.map(order => createOrderHTML(order)).join('');
     }
-
-    noOrderElement.style.display = 'none';
-    orderContentElement.style.display = 'block';
-    const orders = getAllOrders();
-    orderContentElement.innerHTML = orders.map(order => createOrderHTML(order)).join('');
 }
 
-// Function to create a new order from cart items
-function createOrderFromCart() {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    console.log('Retrieved Cart Items:', cartItems); // Debug log
-
-    if (cartItems.length > 0) {
-        initializeNewOrder(cartItems);
-        localStorage.removeItem('cartItems');
-        updateTrackingDisplay(); // Refresh the display
-    } else {
-        console.warn('No items in cart to create order.');
-    }
+// Function to initialize the order tracking page
+function initializeOrderTrackingPage() {
+    updateTrackingStatus(); // Update order statuses
+    updateTrackingDisplay(); // Update the display
+    refresh()
 }
 
 // Initialize the page when it loads
-document.addEventListener('DOMContentLoaded', function () {
-    updateTrackingStatus(); // Update tracking status on page load
-    updateTrackingDisplay(); // Display the updated order tracking
+document.addEventListener('DOMContentLoaded', initializeOrderTrackingPage, refresh());
+
+// Example: Add a new order (or any other action that changes data)
+function addOrder(order) {
+    const orders = getAllOrders();
+    orders.push(order);
+    saveOrders(orders); // Save the new order
+    updateTrackingDisplay(); // Refresh the display without reloading the page
+}
+
+// Example: Updating an order status through a UI action
+document.getElementById('update-status-button').addEventListener('click', () => {
+    const orders = getAllOrders();
+    const order = orders.find(order => order.orderId === 123); // Example order ID
+    if (order) {
+        order.currentStatus = 2; // Update the status to "Shipped"
+        saveOrders(orders); // Save the updated order
+        updateTrackingDisplay(); // Refresh the order display after status change
+    }
 });
+
+function refresh() {
+    setTimeout(() => {
+        initializeOrderTrackingPage();
+    }, 60000);
+}
+

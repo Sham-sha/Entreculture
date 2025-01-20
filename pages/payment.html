@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment - Entreculture</title>
-    <link rel="stylesheet" href="/css/payment.css">
+    <link rel="stylesheet" href="../css/payment.css">
     <link rel="shortcut icon" href="https://res.cloudinary.com/dmff4imdi/image/upload/v1733246969/logo/xaccpbca6fozqqcpdvnx.png" type="image/x-icon">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="payment-container">
@@ -24,46 +23,23 @@
         </div>
 
         <form id="payment-form" class="payment-form">
-            <div class="form-section">
-                <h3>Payment Details</h3>
-                <div class="form-group">
-                    <label for="card-number">Card Number</label>
-                    <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" required>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="expiry">Expiry Date</label>
-                        <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" required>
+            <div class="payment-methods">
+                <h3>Select Payment Method</h3>
+                <div class="method-options">
+                    <div class="method-option">
+                        <input type="radio" id="upi" name="payment-method" value="upi">
+                        <label for="upi">UPI</label>
                     </div>
-                    <div class="form-group">
-                        <label for="cvv">CVV</label>
-                        <input type="password" id="cvv" placeholder="123" maxlength="3" required>
+                    <div class="method-option">
+                        <input type="radio" id="card" name="payment-method" value="card">
+                        <label for="card">Card</label>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="card-name">Name on Card</label>
-                    <input type="text" id="card-name" placeholder="Your Name" required>
-                </div>
-            </div>
-
-            <div class="form-section">
-                <h3>Billing Address</h3>
-                <div class="form-group">
-                    <label for="address">Street Address</label>
-                    <input type="text" id="address" required>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="city">City</label>
-                        <input type="text" id="city" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="pincode">PIN Code</label>
-                        <input type="text" id="pincode" maxlength="6" required>
+                    <div class="method-option">
+                        <input type="radio" id="cod" name="payment-method" value="cod">
+                        <label for="cod">Cash on Delivery</label>
                     </div>
                 </div>
             </div>
-
             <button type="submit" class="pay-button">Pay ₹<span id="pay-amount">0</span></button>
         </form>
     </div>
@@ -85,6 +61,6 @@
         </div>
     </div>
 
-    <script src="../javaScript/payment.js" type="module"></script>
+    <script src="../javaScript/payment.js"></script>
 </body>
 </html>
