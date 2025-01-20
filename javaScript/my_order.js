@@ -111,7 +111,7 @@ function createOrderHTML(order) {
                         </div>
                     </div>
                 `).join('')}
-            </div>git add    
+            </div>    
 
             <div class="product-list">
                 <h2>Ordered Items</h2>
