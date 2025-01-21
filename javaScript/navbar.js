@@ -53,11 +53,18 @@ document.addEventListener("DOMContentLoaded", () => {
         // Check if logged-in user is an admin
         const loggedInEmail = localStorage.getItem("userEmail"); // Get email stored in localStorage
 
-        // Display admin button if the user is an admin
-        if (admin && adminEmails.includes(loggedInEmail)) {
-            admin.style.display = "block";
-        } else if (admin) {
-            admin.style.display = "none";
+        // Display admin button only if the user is an admin
+        if (admin) {
+            if (adminEmails.includes(loggedInEmail)) {
+                admin.style.display = "block";
+            } else {
+                admin.style.display = "none";
+            }
+        }
+
+        // Ensure My Orders button is displayed for all logged-in users
+        if (order) {
+            order.style.display = "block";
         }
 
         // Home button
@@ -105,12 +112,12 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
+        // My Orders button
         if (order) {
             order.addEventListener("click", () => {
                 window.location.href = "../pages/my_order.html";
             });
         }
-        
     };
 
     // Determine which navbar to load based on login status
