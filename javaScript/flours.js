@@ -1,62 +1,88 @@
-// Wait for the page to fully load before running the script
-document.addEventListener('DOMContentLoaded', () => {
-    loadProducts(); // Load and display products from Firebase
-    setupSearch(); // Add event listener for search input
+// Import Firebase modules
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getDatabase, ref, query, orderByChild, equalTo, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyAhx3Qp8Qg23w6bWkcsWYrXtlg46I7_1PA",
+    authDomain: "entreculture-project.firebaseapp.com",
+    databaseURL: "https://entreculture-project-default-rtdb.firebaseio.com",
+    projectId: "entreculture-project",
+    appId: "1:26756746313:web:899812d4cad707d232c398",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+// Run code after the page loads
+window.addEventListener("DOMContentLoaded", () => {
+    showLoadingMessage();
+    fetchProductsByCategory("Flours");
 });
 
-// Array to hold products
-let allProducts = [];
+// Fetch products from Firebase by category
+function fetchProductsByCategory(category) {
+    const productContainer = document.getElementById("product-list");
 
-// Load products from Firebase and display them
-function loadProducts() {
-    const productGrid = document.getElementById("productGrid");
+    // Create a reference and query for the category
     const productsRef = ref(database, "products");
+    const categoryQuery = query(productsRef, orderByChild("category"), equalTo(category));
 
-    onValue(productsRef, (snapshot) => {
-        if (snapshot.exists()) {
-            allProducts = [];
-            snapshot.forEach((childSnapshot) => {
-                const product = {
-                    id: childSnapshot.key,
-                    ...childSnapshot.val(),
-                };
-                allProducts.push(product);
+    // Listen for data changes
+    onValue(categoryQuery, (getProduct) => {
+        if (getProduct.exists()) {
+            const products = [];
+
+            // Collect product data
+            getProduct.forEach((productgetProduct) => {
+                const productData = productgetProduct.val();
+                const productId = productgetProduct.key;
+                products.push({ id: productId, ...productData });
             });
-            displayProducts(allProducts);
+
+            // Display the products
+            renderProducts(products);
         } else {
-            productGrid.innerHTML = "<p>No products found.</p>";
+            showErrorMessage(productContainer, "No products found.");
         }
+    }, (error) => {
+        console.error("Error fetching products:", error);
+        showErrorMessage(productContainer, "Failed to load products.");
     });
+
+    hideLoadingMessage();
 }
 
-// Display products in the grid
-function displayProducts(products) {
-    const productGrid = document.getElementById("productGrid");
-    productGrid.innerHTML = ""; // Clear the product grid
+// Display products on the page
+function renderProducts(products) {
+    const productContainer = document.getElementById("product-list");
 
-    products.forEach((product) => {
-        const productElement = document.createElement("div");
-        productElement.classList.add("product-card");
+    // Create HTML for each product
+    const productHTML = products.map((product) => {
+        return `
+            <div class="card">
+                <img src="${product.imageUrl}" alt="${product.name}">
+                <div class="card-content">
+                    <h3>${product.name}</h3>
+                    <p>Weight: 1kg</p>
+                    <p>Price: ₹${product.price}</p>
+                    <button onclick="addToCart('${product.id}', '${product.name}', '${product.imageUrl}', ${product.price})">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>`;
+    }).join("");
 
-        productElement.innerHTML = `
-            <img src="${product.imageUrl}" alt="${product.name}" class="product-image">
-            <div class="product-info">
-                <h3 class="product-name">${product.name}</h3>
-                <p>Weight: 1kg</p>
-                <p class="product-price">₹${product.price}</p>
-                <button class="add-to-cart" onclick="addToCart('${product.id}', '${product.name}', '${product.imageUrl}', ${product.price})">
-                    Add to Cart
-                </button>
-            </div>
-        `;
-
-        productGrid.appendChild(productElement);
-    });
+    productContainer.innerHTML = productHTML;
 }
 
-// Add product to the cart
+// Add product to cart
 window.addToCart = function (id, name, imageUrl, price) {
-    const cart = JSON.parse(localStorage.getItem('cart')) || []; // Get cart from localStorage
+    // Get the cart from localStorage
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Check if the product is already in the cart
     const existingProduct = cart.find((item) => item.id === id);
 
     if (existingProduct) {
@@ -65,32 +91,39 @@ window.addToCart = function (id, name, imageUrl, price) {
         cart.push({ id, name, imageUrl, price, quantity: 1 });
     }
 
-    localStorage.setItem('cart', JSON.stringify(cart)); // Save updated cart
+    // Save the updated cart
+    localStorage.setItem("cart", JSON.stringify(cart));
     showPopupMessage(`${name} added to cart!`);
 };
 
-// Show a popup message when an item is added to the cart
+// Show popup message
 function showPopupMessage(message) {
-    const popup = document.createElement('div');
-    popup.className = 'cart-popup';
+    const popup = document.createElement("div");
+    popup.className = "cart-popup";
     popup.textContent = message;
     document.body.appendChild(popup);
 
     setTimeout(() => {
-        popup.classList.add('hide');
-        popup.addEventListener('transitionend', () => popup.remove());
+        popup.classList.add("hide");
+        popup.addEventListener("transitionend", () => popup.remove());
     }, 2000);
 }
 
-// Filter products based on search input
-function setupSearch() {
-    const searchInput = document.getElementById('searchInput');
-    searchInput.addEventListener('input', () => {
-        const query = searchInput.value.trim().toLowerCase();
-        const filteredProducts = allProducts.filter(product =>
-            product.name.toLowerCase().includes(query) ||
-            product.price.toString().includes(query)
-        );
-        displayProducts(filteredProducts);
-    });
+// Show loading message
+function showLoadingMessage() {
+    const productContainer = document.getElementById("product-list");
+    productContainer.innerHTML = `<p class="loading">Loading products, please wait...</p>`;
+}
+
+// Hide loading message
+function hideLoadingMessage() {
+    const productContainer = document.getElementById("product-list");
+    productContainer.innerHTML = "";
+}
+
+// Show error message
+function showErrorMessage(container, message) {
+    container.innerHTML = `<div style="text-align: center; padding: 20px;">
+        <p style="color: #e74c3c; font-size: 1.1em;">${message}</p>
+    </div>`;
 }

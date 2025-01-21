@@ -1,32 +1,36 @@
 document.addEventListener("DOMContentLoaded", () => {
     const navbarPlaceholder = document.getElementById("navbar-placeholder");
 
-    // Check if the user is logged in (using localStorage)
+    // Check if the user is logged in (using localStorage or other methods)
     const isLoggedIn = localStorage.getItem("userToken");
 
-    // Preload both navbars initially (in the background)
-    let loggedInNavbarHTML = '';
-    let loggedOutNavbarHTML = '';
-
-    const preloadNavbars = () => {
-        // Preload both navbars
-        return Promise.all([
-            fetch("../pages/navbarLogin.html").then((response) => response.text()),
-            fetch("../pages/navbar.html").then((response) => response.text())
-        ]).then(([loggedInHTML, loggedOutHTML]) => {
-            loggedInNavbarHTML = loggedInHTML;
-            loggedOutNavbarHTML = loggedOutHTML;
-        }).catch((error) => console.error("Error preloading navbars:", error));
+    // Cache navbar HTML to reduce load time
+    const cacheNavbar = (key, filePath) => {
+        const cachedHTML = localStorage.getItem(key);
+        if (cachedHTML) {
+            return Promise.resolve(cachedHTML);
+        }
+        return fetch(filePath)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to load navbar");
+                }
+                return response.text();
+            })
+            .then((html) => {
+                localStorage.setItem(key, html);
+                return html;
+            });
     };
 
     // Load and display the appropriate navbar based on login status
-    const loadNavbar = () => {
-        if (isLoggedIn) {
-            navbarPlaceholder.innerHTML = loggedInNavbarHTML;
-        } else {
-            navbarPlaceholder.innerHTML = loggedOutNavbarHTML;
-        }
-        attachNavbarListeners();
+    const loadNavbar = (filePath, cacheKey) => {
+        cacheNavbar(cacheKey, filePath)
+            .then((html) => {
+                navbarPlaceholder.innerHTML = html;
+                attachNavbarListeners();
+            })
+            .catch((error) => console.error("Error loading navbar:", error));
     };
 
     // Attach event listeners to navbar links
@@ -37,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const logout = document.getElementById("logout");
         const cart = document.getElementById("cart");
         const admin = document.getElementById("admin");
+        const order = document.getElementById("my-orders");
 
         // Array of admin emails
         const adminEmails = [
@@ -48,11 +53,18 @@ document.addEventListener("DOMContentLoaded", () => {
         // Check if logged-in user is an admin
         const loggedInEmail = localStorage.getItem("userEmail"); // Get email stored in localStorage
 
-        // Display admin button if the user is an admin
-        if (admin && adminEmails.includes(loggedInEmail)) {
-            admin.style.display = "block";
-        } else if (admin) {
-            admin.style.display = "none";
+        // Display admin button only if the user is an admin
+        if (admin) {
+            if (adminEmails.includes(loggedInEmail)) {
+                admin.style.display = "block";
+            } else {
+                admin.style.display = "none";
+            }
+        }
+
+        // Ensure My Orders button is displayed for all logged-in users
+        if (order) {
+            order.style.display = "block";
         }
 
         // Home button
@@ -99,10 +111,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
         }
+
+        // My Orders button
+        if (order) {
+            order.addEventListener("click", () => {
+                window.location.href = "../pages/my_order.html";
+            });
+        }
     };
 
-    // Preload navbars and then load the appropriate one
-    preloadNavbars().then(() => {
-        loadNavbar(); // Load the correct navbar after preloading
-    });
+    // Determine which navbar to load based on login status
+    if (isLoggedIn) {
+        loadNavbar("../pages/navbarLogin.html", "loggedInNavbar");
+    } else {
+        loadNavbar("../pages/navbar.html", "loggedOutNavbar");
+    }
 });
